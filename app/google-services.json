@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "5099850523",
+    "project_id": "chang-s-kitchen",
+    "storage_bucket": "chang-s-kitchen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5099850523:android:8abf2a90f5d3cd09e7a1be",
+        "android_client_info": {
+          "package_name": "com.example.changskitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5099850523-mp6nrp18k2u7n7db25fb7tuejsuk1ec2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1BGvqEOh4n5tCh0QcJ77rWv6ldfCdMgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5099850523-mp6nrp18k2u7n7db25fb7tuejsuk1ec2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
