@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2a7ee6</color>
-    <color name="colorPrimaryDark">#76a5df</color>
-    <color name="colorAccent">#ffff8800</color>
+    ffae03<color name="colorPrimary">#749c75</color>
+    <color name="colorPrimaryDark">#606c38</color>
+    <color name="colorAccent">#dda15e</color>
     <color name="zircon">#e0e6e4</color>
     <color name="dark_red">#6a040f</color>
     <color name="light_orange">#f48c06</color>
     <color name="white">#ffffff</color>
+    <color name="beige">#fefae0</color>
 </resources>
