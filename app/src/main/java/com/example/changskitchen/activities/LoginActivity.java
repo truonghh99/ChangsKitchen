@@ -1,4 +1,4 @@
-package com.example.changskitchen;
+package com.example.changskitchen.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
