@@ -4,7 +4,7 @@
     <string name="prompt_password">Password</string>
     <string name="login">Login</string>
     <string name="create_new">Click here to register</string>
-    <string name="not_register">Not Register?</string>
+    <string name="not_register">Back to Login screen</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="register">Register</string>
