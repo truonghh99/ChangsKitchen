@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
 
@@ -82,17 +82,21 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment fragment = null;
                         switch (item.getItemId()) {
-                            case R.id.miCompose:
-                                fragment = composeFragment;
-                                toolbar.setTitle("Add new image");
+                            case R.id.miHistory:
+                                fragment = historyFragment;
+                                toolbar.setTitle("Your Orders");
                                 break;
-                            case R.id.miProfile:
-                                fragment = profileFragment;
-                                toolbar.setTitle("Your Profile");
+                            case R.id.miCurrent:
+                                fragment = currentMenuFragment;
+                                toolbar.setTitle("Today's Menu");
                                 break;
-                            case R.id.miLibrary:
-                                fragment = libraryFragment;
-                                toolbar.setTitle("Image Library");
+                            case R.id.miFuture:
+                                fragment = futureMenusFragment;
+                                toolbar.setTitle("This week's Menus");
+                                break;
+                            case R.id.miContact:
+                                fragment = contactFragment;
+                                toolbar.setTitle("Contact Restaurant");
                                 break;
                             default:
                                 break;
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        bottomNavigation.setSelectedItemId(R.id.miLibrary);
+        bottomNavigation.setSelectedItemId(R.id.miCurrent);
     }
 
     public static void switchFragment(Fragment fragment) {
