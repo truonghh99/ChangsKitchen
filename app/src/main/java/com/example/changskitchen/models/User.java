@@ -31,7 +31,7 @@ public class User {
     public String phone;
 
     public User() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     public void saveToDatabase() {

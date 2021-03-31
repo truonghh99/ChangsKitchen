@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentProfileBinding;
@@ -33,6 +35,7 @@ public class ProfileFragment extends Fragment {
     EditText etEmail;
     EditText etPhone;
     EditText etPassword;
+    Button btUpdate;
 
     public ProfileFragment() {
     }
@@ -55,10 +58,26 @@ public class ProfileFragment extends Fragment {
         etEmail = fragmentProfileBinding.etEmail;
         etPassword = fragmentProfileBinding.etPassword;
         etPhone = fragmentProfileBinding.etPhone;
+        btUpdate = fragmentProfileBinding.btUpdate;
 
         getInfo();
-
+        btUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveInfo();
+            }
+        });
         return fragmentProfileBinding.getRoot();
+    }
+
+    private void saveInfo() {
+        User user = new User();
+        user.name = etName.getText().toString();
+        user.password = etPassword.getText().toString();
+        user.email = etEmail.getText().toString();
+        user.phone = etPhone.getText().toString();
+        user.saveToDatabase();
+        Toast.makeText(getContext(), "Your information has been updated!", Toast.LENGTH_SHORT).show();
     }
 
     public void getInfo() {
