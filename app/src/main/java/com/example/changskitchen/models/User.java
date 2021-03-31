@@ -32,12 +32,10 @@ public class User {
 
     public User() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
     }
 
     public void saveToDatabase() {
         DatabaseReference usersRef = ref.child("users");
         usersRef.child(uid).setValue(this);
     }
-
 }

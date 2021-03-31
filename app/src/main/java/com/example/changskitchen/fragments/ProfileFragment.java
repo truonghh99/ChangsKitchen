@@ -4,11 +4,22 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.changskitchen.R;
+import com.example.changskitchen.databinding.FragmentProfileBinding;
+import com.example.changskitchen.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,20 +28,17 @@ import com.example.changskitchen.R;
  */
 public class ProfileFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FragmentProfileBinding fragmentProfileBinding;
+    EditText etName;
+    EditText etEmail;
+    EditText etPhone;
+    EditText etPassword;
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -42,7 +50,37 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        fragmentProfileBinding = FragmentProfileBinding.inflate(getLayoutInflater());
+        etName = fragmentProfileBinding.etName;
+        etEmail = fragmentProfileBinding.etEmail;
+        etPassword = fragmentProfileBinding.etPassword;
+        etPhone = fragmentProfileBinding.etPhone;
+
+        getInfo();
+
+        return fragmentProfileBinding.getRoot();
+    }
+
+    public void getInfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+        DatabaseReference usersRef = ref.child("users").child(user.getUid());
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                etName.setText(user.name);
+                etEmail.setText(user.email);
+                etPassword.setText(user.password);
+                etPhone.setText(user.phone);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+            }
+        };
+        usersRef.addValueEventListener(postListener);
     }
 }
