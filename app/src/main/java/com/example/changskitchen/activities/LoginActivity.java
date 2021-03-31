@@ -41,6 +41,11 @@ public class LoginActivity extends AppCompatActivity {
         btLogin = activityLoginBinding.btLogin;
         tvRegister = activityLoginBinding.tvRegister;
 
+        if (mAuth.getCurrentUser() != null) {
+            goToMain();
+            finish();
+        }
+
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

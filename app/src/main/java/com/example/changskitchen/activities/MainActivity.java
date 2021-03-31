@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.id.miFuture:
                                 fragment = futureMenusFragment;
-                                toolbar.setTitle("This week's Menus");
+                                toolbar.setTitle("This Week's Menus");
                                 break;
                             case R.id.miContact:
                                 fragment = contactFragment;
