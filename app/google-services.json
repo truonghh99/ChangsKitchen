@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "5099850523",
+    "firebase_url": "https://chang-s-kitchen-default-rtdb.firebaseio.com",
     "project_id": "chang-s-kitchen",
     "storage_bucket": "chang-s-kitchen.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:5099850523:android:8abf2a90f5d3cd09e7a1be",
+        "mobilesdk_app_id": "1:5099850523:android:3cb55bf62671abbce7a1be",
         "android_client_info": {
           "package_name": "com.example.changskitchen"
         }

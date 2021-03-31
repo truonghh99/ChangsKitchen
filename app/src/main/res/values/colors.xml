@@ -3,6 +3,7 @@
     ffae03<color name="colorPrimary">#749c75</color>
     <color name="colorPrimaryDark">#606c38</color>
     <color name="colorAccent">#dda15e</color>
+    <color name="colorAccentDark">#bc6c25</color>
     <color name="zircon">#e0e6e4</color>
     <color name="dark_red">#6a040f</color>
     <color name="light_orange">#f48c06</color>
