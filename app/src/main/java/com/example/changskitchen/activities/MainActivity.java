@@ -17,6 +17,7 @@ import com.example.changskitchen.fragments.ContactFragment;
 import com.example.changskitchen.fragments.CurrentMenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
+import com.example.changskitchen.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     final Fragment currentMenuFragment = CurrentMenuFragment.newInstance();
     final Fragment futureMenusFragment = FutureMenusFragment.newInstance();
     final Fragment historyFragment = HistoryFragment.newInstance();
+    final Fragment profileFragment = ProfileFragment.newInstance();
 
 
     private Toolbar toolbar;
@@ -63,10 +65,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.miLogout:
                 mAuth.signOut();
                 goToLogin();
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.miProfile:
+                switchFragment(profileFragment);
+                toolbar.setTitle("Your Profile");
+                bottomNavigation.getMenu().setGroupCheckable(0, false, true);
+                break;
         }
-    }
+        return super.onOptionsItemSelected(item);
+        }
 
     private void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment fragment = null;
+                        bottomNavigation.getMenu().setGroupCheckable(0, true, true);
                         switch (item.getItemId()) {
                             case R.id.miHistory:
                                 fragment = historyFragment;
@@ -105,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
         bottomNavigation.setSelectedItemId(R.id.miCurrent);
     }
 
