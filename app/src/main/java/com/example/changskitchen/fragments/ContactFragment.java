@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.changskitchen.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,15 +18,14 @@ import com.example.changskitchen.R;
  */
 public class ContactFragment extends Fragment {
 
+    private FirebaseDatabase mDatabase;
+    private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mFirebaseAdapter;
+
     public ContactFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ContactFragment newInstance() {
         ContactFragment fragment = new ContactFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
