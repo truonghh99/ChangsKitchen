@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ActivityMainBinding;
-import com.example.changskitchen.fragments.ContactFragment;
 import com.example.changskitchen.fragments.CurrentMenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
@@ -24,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    final Fragment contactFragment = ContactFragment.newInstance();
     final Fragment currentMenuFragment = CurrentMenuFragment.newInstance();
     final Fragment futureMenusFragment = FutureMenusFragment.newInstance();
     final Fragment historyFragment = HistoryFragment.newInstance();
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                                 toolbar.setTitle("This Week's Menus");
                                 break;
                             case R.id.miContact:
-                                fragment = contactFragment;
+                                fragment = futureMenusFragment; // to be corrected later
                                 toolbar.setTitle("Contact Restaurant");
                                 break;
                             default:

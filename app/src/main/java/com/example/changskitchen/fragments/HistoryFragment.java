@@ -22,8 +22,8 @@ public class HistoryFragment extends Fragment {
     }
 
     // TODO: Rename and change types and number of parameters
-    public static ContactFragment newInstance() {
-        ContactFragment fragment = new ContactFragment();
+    public static HistoryFragment newInstance() {
+        HistoryFragment fragment = new HistoryFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -40,6 +40,6 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
 }
