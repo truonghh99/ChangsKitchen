@@ -31,7 +31,7 @@ public class Order {
     public String timestamp;
 
     public Order() {
-        orderID = getInstance().getCurrentOrder().getorderID();
+        //orderID = getInstance().getCurrentOrder().getorderID();
     }
 
     public void saveToDatabase() {
