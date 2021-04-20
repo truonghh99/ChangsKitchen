@@ -10,6 +10,7 @@
     tools:context=".fragments.DishFragment">
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:minLines="3"
-            tools:hint="Any note for the restaurant? (Optional)" />
+            android:hint="Any note for the restaurant?" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
