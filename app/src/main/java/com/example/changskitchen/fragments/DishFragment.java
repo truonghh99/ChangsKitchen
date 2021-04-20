@@ -19,6 +19,7 @@ import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentDishBinding;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.OrderItem;
+import com.example.changskitchen.storage.CurrentOrder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,6 +96,7 @@ public class DishFragment extends DialogFragment {
                 orderItem.quantity = Float.valueOf(etQuantity.getText().toString());
                 orderItem.price = orderItem.unitPrice * orderItem.quantity;
                 orderItem.note = etNote.getText().toString();
+                CurrentOrder.addItem(orderItem);
             }
         });
         return fragmentDishBinding.getRoot();
