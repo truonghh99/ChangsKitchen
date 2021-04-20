@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ItemMenuBinding;
 import com.example.changskitchen.databinding.ItemOrderItemBinding;
 import com.example.changskitchen.models.OrderItem;
+import com.example.changskitchen.storage.CurrentOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +23,15 @@ import java.util.List;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> {
     private List<OrderItem> callListResponses = new ArrayList<>();
-    final List templist=new ArrayList<>();
     private Activity context;
-    int lastPosition=0;
+    private Button btCheckout;
 
-    public OrderItemAdapter(Activity context, List callListResponses)
+    public OrderItemAdapter(Activity context, List callListResponses, Button btCheckout)
     {
         super();
         this.context = context;
         this.callListResponses=callListResponses;
+        this.btCheckout = btCheckout;
     }
 
     @Override
@@ -51,13 +53,13 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         holder.ivMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateQuantity(orderItem, holder.tvQuantity, -1);
+                updateQuantity(orderItem, holder.tvQuantity, holder.tvTotal, -1);
             }
         });
         holder.ivPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateQuantity(orderItem, holder.tvQuantity, 1);
+                updateQuantity(orderItem, holder.tvQuantity, holder.tvTotal, 1);
             }
         });
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
@@ -71,9 +73,13 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
     private void deleteItem(OrderItem orderItem) {
     }
 
-    private void updateQuantity(OrderItem orderItem, TextView tvQuantity, int i) {
+    private void updateQuantity(OrderItem orderItem, TextView tvQuantity, TextView tvTotal, int i) {
         orderItem.quantity += i;
-        tvQuantity.setText((int) orderItem.quantity);
+        orderItem.price = orderItem.unitPrice * orderItem.quantity;
+        tvQuantity.setText(String.valueOf(orderItem.quantity));
+        tvTotal.setText(String.valueOf(orderItem.price));
+        CurrentOrder.totalPrice += orderItem.unitPrice;
+        btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
     }
 
     @Override

@@ -69,7 +69,7 @@ public class CartFragment extends Fragment {
         tvDate.setText("Order date: " + convertToDate(CurrentOrder.menuId));
         btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
 
-        adapter = new OrderItemAdapter(getActivity(), CurrentOrder.orderItems);
+        adapter = new OrderItemAdapter(getActivity(), CurrentOrder.orderItems, btCheckout);
         rvCartItems.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCartItems.setAdapter(adapter);
 
