@@ -12,18 +12,18 @@ import com.example.changskitchen.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CurrentMenuFragment#newInstance} factory method to
+ * Use the {@link MenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CurrentMenuFragment extends Fragment {
+public class MenuFragment extends Fragment {
 
-    public CurrentMenuFragment() {
+    public MenuFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static CurrentMenuFragment newInstance() {
-        CurrentMenuFragment fragment = new CurrentMenuFragment();
+    public static MenuFragment newInstance() {
+        MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -40,6 +40,6 @@ public class CurrentMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current_menu, container, false);
+        return inflater.inflate(R.layout.fragment_menu, container, false);
     }
 }

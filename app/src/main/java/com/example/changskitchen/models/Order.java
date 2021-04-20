@@ -35,7 +35,6 @@ public class Order {
     }
 
 
-
     public void saveOrderToDatabase(String oid, final String oPrice, final String oStatus, final String oNotes, final String oTimestamp) {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersRef = ref.child("users").child(user.getUid());

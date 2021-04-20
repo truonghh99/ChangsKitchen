@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ActivityMainBinding;
-import com.example.changskitchen.fragments.CurrentMenuFragment;
+import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
 import com.example.changskitchen.fragments.ProfileFragment;
@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    final Fragment currentMenuFragment = CurrentMenuFragment.newInstance();
+    final Fragment currentMenuFragment = MenuFragment.newInstance();
     final Fragment futureMenusFragment = FutureMenusFragment.newInstance();
     final Fragment historyFragment = HistoryFragment.newInstance();
     final Fragment profileFragment = ProfileFragment.newInstance();
