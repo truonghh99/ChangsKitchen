@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.changskitchen.R;
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.adapters.DishAdapter;
 import com.example.changskitchen.adapters.OrderItemAdapter;
 import com.example.changskitchen.databinding.FragmentCartBinding;
@@ -73,6 +74,13 @@ public class CartFragment extends Fragment {
         rvCartItems.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCartItems.setAdapter(adapter);
 
+        btCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckoutFragment checkoutFragment = new CheckoutFragment();
+                MainActivity.showDialogFragment(checkoutFragment, "Checkout");
+            }
+        });
         return fragmentCartBinding.getRoot();
     }
 
