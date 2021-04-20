@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentDishBinding;
 import com.example.changskitchen.models.Dish;
+import com.example.changskitchen.models.OrderItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +77,19 @@ public class DishFragment extends DialogFragment {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        btAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.name = dish.name;
+                orderItem.description = dish.description;
+                orderItem.unitPrice = dish.price;
+                orderItem.quantity = Float.valueOf(etQuantity.getText().toString());
+                orderItem.price = orderItem.unitPrice * orderItem.quantity;
+                orderItem.note = etNote.getText().toString();
             }
         });
         return fragmentDishBinding.getRoot();

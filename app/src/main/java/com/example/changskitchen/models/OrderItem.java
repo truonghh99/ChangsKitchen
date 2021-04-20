@@ -13,18 +13,27 @@ import com.google.firebase.database.ValueEventListener;
 
 public class OrderItem implements Parcelable {
 
+
     public String orderId;
     public String dishId;
-    public String quantity;
+    public String name;
+    public String description;
+    public float unitPrice;
+    public float quantity;
     public float price;
+    public String note;
 
     public OrderItem() {
+
     }
 
     protected OrderItem(Parcel in) {
         orderId = in.readString();
         dishId = in.readString();
-        quantity = in.readString();
+        name = in.readString();
+        description = in.readString();
+        unitPrice = in.readFloat();
+        quantity = in.readFloat();
         price = in.readFloat();
     }
 
@@ -49,7 +58,10 @@ public class OrderItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(orderId);
         dest.writeString(dishId);
-        dest.writeString(quantity);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeFloat(unitPrice);
+        dest.writeFloat(quantity);
         dest.writeFloat(price);
     }
 }
