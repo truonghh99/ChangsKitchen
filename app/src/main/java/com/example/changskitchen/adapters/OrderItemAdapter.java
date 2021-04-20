@@ -49,9 +49,32 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         holder.tvQuantity.setText(String.valueOf(orderItem.quantity));
         holder.tvTotal.setText(String.valueOf(orderItem.price));
 
-        holder.ivMinus.setOnClickListener(updateQuantity(orderItem, -1));
-        holder.ivPlus.setOnClickListener(updateQuantity(orderItem, 1));
-        holder.ivDelete.setOnClickListener(deleteItem(orderItem));
+        holder.ivMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateQuantity(orderItem, holder.tvQuantity, -1);
+            }
+        });
+        holder.ivPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateQuantity(orderItem, holder.tvQuantity, 1);
+            }
+        });
+        holder.ivDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteItem(orderItem);
+            }
+        });
+    }
+
+    private void deleteItem(OrderItem orderItem) {
+    }
+
+    private void updateQuantity(OrderItem orderItem, TextView tvQuantity, int i) {
+        orderItem.quantity += i;
+        tvQuantity.setText((int) orderItem.quantity);
     }
 
     @Override
