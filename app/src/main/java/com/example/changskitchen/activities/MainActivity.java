@@ -3,6 +3,7 @@ package com.example.changskitchen.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -138,5 +139,9 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
         toolbar.setTitle(title);
+    }
+
+    public static void showDialogFragment(DialogFragment fragment, String tag) {
+        fragment.show(fragmentManager, tag);
     }
 }

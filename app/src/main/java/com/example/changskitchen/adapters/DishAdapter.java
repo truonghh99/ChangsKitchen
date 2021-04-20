@@ -18,7 +18,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.databinding.ItemDishBinding;
+import com.example.changskitchen.fragments.DishFragment;
 import com.example.changskitchen.models.Dish;
 
 import java.util.List;
@@ -75,7 +77,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             cvDish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Switch to dish detail
+                    DishFragment fragment = DishFragment.newInstance(dish);
+                    MainActivity.showDialogFragment(fragment, "Dish Detail");
                 }
             });
         }
