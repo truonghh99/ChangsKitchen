@@ -64,13 +64,36 @@ public class CheckoutFragment extends DialogFragment {
 
         tax = (float) (CurrentOrder.totalPrice * 0.1);
         tip = (float) ((CurrentOrder.totalPrice + tax) * 0.2);
-        finalPrice = (float) tax + tip + CurrentOrder.totalPrice;
+        calculateFinalPrice();
 
         tvSubtotal.setText(String.valueOf(CurrentOrder.totalPrice));
         tvTax.setText(String.valueOf(tax));
         etTip.setText(String.valueOf(tip));
         tvTotal.setText(String.valueOf(finalPrice));
 
+        etTip.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    tip = Float.valueOf(etTip.getText().toString());
+                    calculateFinalPrice();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        btOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         return checkoutFragment.getRoot();
+    }
+
+    private void calculateFinalPrice() {
+        finalPrice = (float) tax + tip + CurrentOrder.totalPrice;
+        tvTotal.setText(String.valueOf(finalPrice));
     }
 }
