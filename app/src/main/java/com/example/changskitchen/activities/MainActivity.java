@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(activityMainBinding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
-        currentMenuFragment = MenuFragment.newInstance("4192021"); // to be updated to current date
+        currentMenuFragment = MenuFragment.newInstance("4202021"); // to be updated to current date
         futureMenusFragment = FutureMenusFragment.newInstance();
         historyFragment = HistoryFragment.newInstance();
         profileFragment = ProfileFragment.newInstance();
