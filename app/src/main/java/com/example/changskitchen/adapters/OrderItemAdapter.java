@@ -43,7 +43,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final OrderItem orderItem = callListResponses.get(position);
 
         holder.tvName.setText(orderItem.name);
@@ -65,20 +65,24 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteItem(orderItem);
+                deleteItem(position);
             }
         });
     }
 
-    private void deleteItem(OrderItem orderItem) {
+    private void deleteItem(int position) {
+        CurrentOrder.totalPrice -= CurrentOrder.orderItems.get(position).price;
+        CurrentOrder.orderItems.remove(position);
+        notifyDataSetChanged();
+        btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
     }
 
     private void updateQuantity(OrderItem orderItem, TextView tvQuantity, TextView tvTotal, int i) {
         orderItem.quantity += i;
-        orderItem.price = orderItem.unitPrice * orderItem.quantity;
+        orderItem.price = orderItem.unitPrice * i * orderItem.quantity;
         tvQuantity.setText(String.valueOf(orderItem.quantity));
         tvTotal.setText(String.valueOf(orderItem.price));
-        CurrentOrder.totalPrice += orderItem.unitPrice;
+        CurrentOrder.totalPrice += orderItem.unitPrice * i;
         btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
     }
 
