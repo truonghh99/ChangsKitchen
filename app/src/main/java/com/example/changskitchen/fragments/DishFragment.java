@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,7 +97,9 @@ public class DishFragment extends DialogFragment {
                 orderItem.quantity = Float.valueOf(etQuantity.getText().toString());
                 orderItem.price = orderItem.unitPrice * orderItem.quantity;
                 orderItem.note = etNote.getText().toString();
-                CurrentOrder.addItem(orderItem);
+                CurrentOrder.addItem(orderItem, menuId, getActivity());
+                Log.e(TAG, "clicked");
+                dismiss();
             }
         });
         return fragmentDishBinding.getRoot();
