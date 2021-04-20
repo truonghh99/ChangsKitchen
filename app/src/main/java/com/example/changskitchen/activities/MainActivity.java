@@ -19,14 +19,21 @@ import com.example.changskitchen.fragments.HistoryFragment;
 import com.example.changskitchen.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    final Fragment currentMenuFragment = MenuFragment.newInstance();
-    final Fragment futureMenusFragment = FutureMenusFragment.newInstance();
-    final Fragment historyFragment = HistoryFragment.newInstance();
-    final Fragment profileFragment = ProfileFragment.newInstance();
+    private Fragment currentMenuFragment;
+    private Fragment futureMenusFragment;
+    private Fragment historyFragment;
+    private Fragment profileFragment;
 
 
     private Toolbar toolbar;
@@ -35,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public static BottomNavigationView bottomNavigation;
     private static FragmentManager fragmentManager;
     private ActivityMainBinding activityMainBinding;
+    private com.example.changskitchen.models.Menu todayMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +51,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(activityMainBinding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
+        getTodayMenu();
+        currentMenuFragment = MenuFragment.newInstance(todayMenu);
+        futureMenusFragment = FutureMenusFragment.newInstance();
+        historyFragment = HistoryFragment.newInstance();
+        profileFragment = ProfileFragment.newInstance();
+
         bottomNavigation = findViewById(R.id.bottomNavigation);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Your Profile");
         setSupportActionBar(toolbar);
         setUpBottomBar();
+    }
+
+    private void getTodayMenu() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference todayRef = database.getReference("server/saving-data/fireblog").child("menus").child("4192021");
+        todayRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                todayMenu = dataSnapshot.getValue(com.example.changskitchen.models.Menu.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
 
     @Override
