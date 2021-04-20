@@ -66,7 +66,7 @@ public class CartFragment extends Fragment {
         tvDate = fragmentCartBinding.tvDate;
         btCheckout = fragmentCartBinding.btCheckout;
 
-        tvDate.setText("Order date: " + convertToDate(CurrentOrder.menuId));
+        tvDate.setText("Order date: " + CurrentOrder.date);
         btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
 
         adapter = new OrderItemAdapter(getActivity(), CurrentOrder.orderItems, btCheckout);
@@ -76,14 +76,5 @@ public class CartFragment extends Fragment {
         return fragmentCartBinding.getRoot();
     }
 
-    private String convertToDate(String menuId) {
-        Date date = new Date();
-        try {
-            date = new SimpleDateFormat("yyyyMMdd").parse(menuId);
-        } catch (ParseException e) {
-            Log.e(TAG, e.toString());
-        }
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        return dateFormat.format(date);
-    }
+
 }

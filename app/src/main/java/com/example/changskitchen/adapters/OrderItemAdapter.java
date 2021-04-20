@@ -79,10 +79,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
     private void updateQuantity(OrderItem orderItem, TextView tvQuantity, TextView tvTotal, int i) {
         orderItem.quantity += i;
-        orderItem.price = orderItem.unitPrice * i * orderItem.quantity;
+        orderItem.price += orderItem.unitPrice * i;
+        CurrentOrder.totalPrice += orderItem.unitPrice * i;
+
         tvQuantity.setText(String.valueOf(orderItem.quantity));
         tvTotal.setText(String.valueOf(orderItem.price));
-        CurrentOrder.totalPrice += orderItem.unitPrice * i;
         btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
     }
 
