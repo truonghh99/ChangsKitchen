@@ -60,7 +60,7 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentMenuBinding fragmentMenuBinding = FragmentMenuBinding.inflate(getLayoutInflater());
         rvDishes = fragmentMenuBinding.rvDishes;
-        adapter = new DishAdapter(getActivity(), menu.dishes);
+        adapter = new DishAdapter(getActivity(), menu.dishes, menuId);
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);
 

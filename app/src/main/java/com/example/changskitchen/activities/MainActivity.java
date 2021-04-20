@@ -83,18 +83,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.miLogout:
                 mAuth.signOut();
-                goToLogin();
             case R.id.miProfile:
                 switchFragment(profileFragment, "Your Profile");
                 bottomNavigation.getMenu().setGroupCheckable(0, false, true);
                 break;
         }
         return super.onOptionsItemSelected(item);
-        }
-
-    private void goToLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 
     private void setUpBottomBar() {

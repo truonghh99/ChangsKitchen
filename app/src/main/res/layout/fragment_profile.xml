@@ -111,6 +111,18 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp"/>
 
+            <Button
+                android:id="@+id/btLogout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_gradient"
+                android:text="Logout"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -1,5 +1,6 @@
 package com.example.changskitchen.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.changskitchen.R;
+import com.example.changskitchen.activities.LoginActivity;
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.databinding.FragmentProfileBinding;
 import com.example.changskitchen.models.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +39,7 @@ public class ProfileFragment extends Fragment {
     EditText etPhone;
     EditText etPassword;
     Button btUpdate;
+    Button btLogout;
 
     public ProfileFragment() {
     }
@@ -59,6 +63,7 @@ public class ProfileFragment extends Fragment {
         etPassword = fragmentProfileBinding.etPassword;
         etPhone = fragmentProfileBinding.etPhone;
         btUpdate = fragmentProfileBinding.btUpdate;
+        btLogout = fragmentProfileBinding.btLogout;
 
         getInfo();
         btUpdate.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +72,24 @@ public class ProfileFragment extends Fragment {
                 saveInfo();
             }
         });
+        btLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
         return fragmentProfileBinding.getRoot();
+    }
+
+    private void logout() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
+        goToLogin();
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     private void saveInfo() {
