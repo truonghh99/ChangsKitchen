@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ActivityMainBinding;
+import com.example.changskitchen.fragments.ContactFragment;
 import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment futureMenusFragment;
     private Fragment historyFragment;
     private Fragment profileFragment;
+    private Fragment contactFragment;
 
 
     private static Toolbar toolbar;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         futureMenusFragment = FutureMenusFragment.newInstance();
         historyFragment = HistoryFragment.newInstance();
         profileFragment = ProfileFragment.newInstance();
+        contactFragment = ContactFragment.newInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
         toolbar = findViewById(R.id.toolbar);
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                 title = "This Week's Menus";
                                 break;
                             case R.id.miContact:
-                                fragment = futureMenusFragment; // to be corrected later
+                                fragment = contactFragment;
                                 title = "Contact Restaurant";
                                 break;
                             default:
