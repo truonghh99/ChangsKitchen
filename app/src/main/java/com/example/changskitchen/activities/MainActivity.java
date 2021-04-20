@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private Fragment profileFragment;
 
 
-    private Toolbar toolbar;
+    private static Toolbar toolbar;
     private FirebaseAuth mAuth;
+    private String title;
 
     public static BottomNavigationView bottomNavigation;
     private static FragmentManager fragmentManager;
@@ -80,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 goToLogin();
             case R.id.miProfile:
-                switchFragment(profileFragment);
-                toolbar.setTitle("Your Profile");
+                switchFragment(profileFragment, "Your Profile");
                 bottomNavigation.getMenu().setGroupCheckable(0, false, true);
                 break;
         }
@@ -105,34 +105,35 @@ public class MainActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.miHistory:
                                 fragment = historyFragment;
-                                toolbar.setTitle("Your Orders");
+                                title = "Your Orders";
                                 break;
                             case R.id.miCurrent:
                                 fragment = currentMenuFragment;
-                                toolbar.setTitle("Today's Menu");
+                                title = "Today's Menu";
                                 break;
                             case R.id.miFuture:
                                 fragment = futureMenusFragment;
-                                toolbar.setTitle("This Week's Menus");
+                                title = "This Week's Menus";
                                 break;
                             case R.id.miContact:
                                 fragment = futureMenusFragment; // to be corrected later
-                                toolbar.setTitle("Contact Restaurant");
+                                title = "Contact Restaurant";
                                 break;
                             default:
                                 break;
                         }
-                        switchFragment(fragment);
+                        switchFragment(fragment, title);
                         return true;
                     }
                 });
         bottomNavigation.setSelectedItemId(R.id.miCurrent);
     }
 
-    public static void switchFragment(Fragment fragment) {
+    public static void switchFragment(Fragment fragment, String title) {
         fragmentManager.beginTransaction()
                 .replace(R.id.flContainer, fragment)
                 .addToBackStack(null)
                 .commit();
+        toolbar.setTitle(title);
     }
 }

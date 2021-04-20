@@ -18,7 +18,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.databinding.ItemMenuBinding;
+import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.models.Dish;
 
 import java.text.DateFormat;
@@ -79,7 +81,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             cvMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Switch to dish detail
+                    MenuFragment newFragment = MenuFragment.newInstance(menuId);
+                    MainActivity.switchFragment(newFragment, convertToDate(menuId));
                 }
             });
         }
