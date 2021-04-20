@@ -29,8 +29,11 @@ public class DishFragment extends DialogFragment {
 
     private static final String TAG = "DialogFragment";
     private static final String DISH_KEY = "dish";
+    private static final String MENU_KEY = "menu";
 
     private Dish dish;
+    private String menuId;
+
     private FragmentDishBinding fragmentDishBinding;
     private TextView tvName;
     private TextView tvDescription;
@@ -38,10 +41,11 @@ public class DishFragment extends DialogFragment {
     private EditText etQuantity;
     private Button btAdd;
 
-    public static DishFragment newInstance(Dish dish) {
+    public static DishFragment newInstance(Dish dish, String menuId) {
         DishFragment fragment = new DishFragment();
         Bundle args = new Bundle();
         args.putParcelable(DISH_KEY, dish);
+        args.putString(MENU_KEY, menuId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +55,7 @@ public class DishFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             dish = getArguments().getParcelable(DISH_KEY);
+            menuId = getArguments().getString(MENU_KEY);
         }
     }
 

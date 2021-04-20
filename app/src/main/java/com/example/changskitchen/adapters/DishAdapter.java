@@ -30,6 +30,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     private static final String TAG = "CurrentFoodAdapter";
     private Context context;
     public static List<Dish> dishes;
+    private String menuId;
 
     @NonNull
     @Override
@@ -39,15 +40,16 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         return new ViewHolder(itemDishBinding);
     }
 
-    public DishAdapter(Context context, List<Dish> dishes) {
+    public DishAdapter(Context context, List<Dish> dishes, String menuId) {
         this.context = context;
         this.dishes = dishes;
+        this.menuId = menuId;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Dish dish = dishes.get(position);
-        holder.bind(dish);
+        holder.bind(dish, menuId);
     }
 
     @Override
@@ -70,14 +72,14 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             cvDish = itemDishBinding.cvDish;
         }
 
-        public void bind(final Dish dish) {
+        public void bind(final Dish dish, final String menuId) {
             tvName.setText(dish.name);
             tvDescription.setText(dish.description);
             tvPrice.setText("" + dish.price + '$');
             cvDish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DishFragment fragment = DishFragment.newInstance(dish);
+                    DishFragment fragment = DishFragment.newInstance(dish, menuId);
                     MainActivity.showDialogFragment(fragment, "Dish Detail");
                 }
             });
