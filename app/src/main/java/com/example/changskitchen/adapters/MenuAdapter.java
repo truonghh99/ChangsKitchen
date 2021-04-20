@@ -85,7 +85,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         }
 
         private String convertToWeekDay(String menuId) {
-            SimpleDateFormat format1=new SimpleDateFormat("mm/dd/yyyy");
+            SimpleDateFormat format1=new SimpleDateFormat("yyyymmdd");
             Date dt1= null;
             try {
                 dt1 = format1.parse(menuId);
@@ -100,7 +100,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         private Date convertToDate(String menuId) {
             Date date = new Date();
             try {
-                date = new SimpleDateFormat("mm/dd/yyyy").parse(menuId);
+                date = new SimpleDateFormat("yyyymmdd").parse(menuId);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
