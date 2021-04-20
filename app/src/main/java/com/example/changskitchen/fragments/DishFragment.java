@@ -45,6 +45,8 @@ public class DishFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fragmentDishBinding = FragmentDishBinding.inflate(getLayoutInflater());
+
         return inflater.inflate(R.layout.fragment_dish, container, false);
     }
 }

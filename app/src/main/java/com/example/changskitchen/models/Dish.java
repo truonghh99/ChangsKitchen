@@ -13,7 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Dish implements Parcelable {
 
-    final String TAG = "DishModel";
+    private final String TAG = "DishModel";
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("dishes");
 
@@ -45,6 +45,26 @@ public class Dish implements Parcelable {
             }
         });
     }
+
+    protected Dish(Parcel in) {
+        dishId = in.readString();
+        name = in.readString();
+        description = in.readString();
+        price = in.readFloat();
+    }
+
+    public static final Creator<Dish> CREATOR = new Creator<Dish>() {
+        @Override
+        public Dish createFromParcel(Parcel in) {
+            return new Dish(in);
+        }
+
+        @Override
+        public Dish[] newArray(int size) {
+            return new Dish[size];
+        }
+    };
+
     public void saveToDatabase() {
         DatabaseReference dishRef = ref.child("dishes");
         dishRef.child(dishId).setValue(this);
@@ -57,6 +77,10 @@ public class Dish implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(TAG);
+        dest.writeString(dishId);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeFloat(price);
     }
 }
