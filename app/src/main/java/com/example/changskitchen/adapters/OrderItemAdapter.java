@@ -45,7 +45,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         final OrderItem orderItem = callListResponses.get(position);
 
         holder.tvName.setText(orderItem.name);
-        holder.tvNote.setText(orderItem.note);
         holder.tvQuantity.setText(String.valueOf(orderItem.quantity));
         holder.tvTotal.setText(String.valueOf(orderItem.price));
 
@@ -86,7 +85,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName, tvNote, tvQuantity, tvTotal;
+        private TextView tvName, tvQuantity, tvTotal;
         ImageView ivMinus, ivPlus, ivDelete;
 
 
@@ -96,7 +95,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             ivPlus=(ImageView) itemOrderItemBinding.ivPlus;
             ivDelete=(ImageView) itemOrderItemBinding.ivDelete;
             tvName = itemOrderItemBinding.tvName;
-            tvNote = itemOrderItemBinding.tvNote;
             tvQuantity = itemOrderItemBinding.tvQuantity;
             tvTotal = itemOrderItemBinding.tvTotal;
 
