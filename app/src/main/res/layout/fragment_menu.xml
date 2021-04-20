@@ -6,7 +6,7 @@
     tools:context=".fragments.MenuFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMenuItems"
+        android:id="@+id/rvDishes"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -18,7 +18,7 @@ public class Dish {
     }
 
     public void saveToDatabase() {
-        DatabaseReference dishRef = ref.child("menu");
+        DatabaseReference dishRef = ref.child("dishes");
         dishRef.child(dishId).setValue(this);
     }
 }
