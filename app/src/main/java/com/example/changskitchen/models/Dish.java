@@ -1,5 +1,7 @@
 package com.example.changskitchen.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -9,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Dish {
+public class Dish implements Parcelable {
 
     final String TAG = "DishModel";
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -46,5 +48,15 @@ public class Dish {
     public void saveToDatabase() {
         DatabaseReference dishRef = ref.child("dishes");
         dishRef.child(dishId).setValue(this);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
