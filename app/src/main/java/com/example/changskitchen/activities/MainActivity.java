@@ -17,13 +17,16 @@ import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
 import com.example.changskitchen.fragments.ProfileFragment;
+import com.example.changskitchen.models.Dish;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 
 import java.util.Date;
 
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(activityMainBinding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
-        getTodayMenu();
+        todayMenu = new com.example.changskitchen.models.Menu("4192021"); // to be updated to current date
         currentMenuFragment = MenuFragment.newInstance(todayMenu);
         futureMenusFragment = FutureMenusFragment.newInstance();
         historyFragment = HistoryFragment.newInstance();
@@ -62,22 +65,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Your Profile");
         setSupportActionBar(toolbar);
         setUpBottomBar();
-    }
-
-    private void getTodayMenu() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference todayRef = database.getReference("server/saving-data/fireblog").child("menus").child("4192021");
-        todayRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                todayMenu = dataSnapshot.getValue(com.example.changskitchen.models.Menu.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
     }
 
     @Override
