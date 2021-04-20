@@ -53,8 +53,7 @@ public class FutureMenusFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        getMenuIdList();
     }
 
     @Override
@@ -62,7 +61,6 @@ public class FutureMenusFragment extends Fragment {
                              Bundle savedInstanceState) {
         fragmentFutureMenusBinding = FragmentFutureMenusBinding.inflate(getLayoutInflater());
         rvMenu = fragmentFutureMenusBinding.rvMenu;
-        getMenuIdList();
 
         adapter = new MenuAdapter(getContext(), menuIds);
         rvMenu.setAdapter(adapter);

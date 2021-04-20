@@ -52,6 +52,7 @@ public class MenuFragment extends Fragment {
         if (getArguments() != null) {
             menuId = getArguments().getString(MENU_KEY);
         }
+        menu = new Menu(menuId, this);
     }
 
     @Override
@@ -59,7 +60,6 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentMenuBinding fragmentMenuBinding = FragmentMenuBinding.inflate(getLayoutInflater());
         rvDishes = fragmentMenuBinding.rvDishes;
-        menu = new Menu(menuId, this);
         adapter = new DishAdapter(getActivity(), menu.dishes);
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);

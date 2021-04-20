@@ -72,10 +72,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         }
 
         public void bind(final String menuId) {
-            Date date = convertToDate(menuId);
+            String date = convertToDate(menuId);
             String weekday = convertToWeekDay(menuId);
-            tvWeekDay.setText(menuId);
-            tvDate.setText(menuId);
+            tvWeekDay.setText(weekday);
+            tvDate.setText(date);
             cvMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,26 +85,27 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         }
 
         private String convertToWeekDay(String menuId) {
-            SimpleDateFormat format1=new SimpleDateFormat("yyyymmdd");
-            Date dt1= null;
+            Log.e(TAG, menuId);
+            Date date = null;
             try {
-                dt1 = format1.parse(menuId);
+                date = new SimpleDateFormat("yyyyMMdd").parse(menuId);
+                Log.e(TAG, date.toString());
             } catch (ParseException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.toString());
             }
-            DateFormat format2=new SimpleDateFormat("EEEE");
-            String finalDay=format2.format(dt1);
-            return finalDay;
+            DateFormat dateFormat =new SimpleDateFormat("EEEE");
+            return dateFormat.format(date);
         }
 
-        private Date convertToDate(String menuId) {
+        private String convertToDate(String menuId) {
             Date date = new Date();
             try {
-                date = new SimpleDateFormat("yyyymmdd").parse(menuId);
+                date = new SimpleDateFormat("yyyyMMdd").parse(menuId);
             } catch (ParseException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.toString());
             }
-            return date;
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            return dateFormat.format(date);
         }
     }
 
