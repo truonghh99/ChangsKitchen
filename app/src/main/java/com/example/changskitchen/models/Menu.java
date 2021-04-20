@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.example.changskitchen.adapters.DishAdapter;
+import com.example.changskitchen.fragments.MenuFragment;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +31,7 @@ public class Menu implements Parcelable {
     public Menu() {
     }
 
-    public Menu(String id) {
+    public Menu(String id, final MenuFragment menuFragment) {
         this.menuId = id;
         dishes = new ArrayList<>();
         DatabaseReference dishRef = ref.child(id).child("dishes");
@@ -39,6 +41,7 @@ public class Menu implements Parcelable {
                 String dishId = (String) snapshot.getValue();
                 Dish dish = new Dish(dishId);
                 dishes.add(dish);
+                menuFragment.adapter.notifyDataSetChanged();
             }
 
             @Override

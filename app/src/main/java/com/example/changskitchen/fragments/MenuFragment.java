@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,18 +29,19 @@ public class MenuFragment extends Fragment {
 
     private static final String TAG = "MenuFragment";
     private static final String MENU_KEY = "MenuKey";
+    String menuId;
     private Menu menu;
     private List<Dish> dishes = new ArrayList<>();
     private RecyclerView rvDishes;
-    private DishAdapter adapter;
+    public DishAdapter adapter;
 
     public MenuFragment() {
     }
 
-    public static MenuFragment newInstance(Menu menu) {
+    public static MenuFragment newInstance(String menuId) {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
-        args.putParcelable(MENU_KEY, menu);
+        args.putString(MENU_KEY, menuId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,7 +50,7 @@ public class MenuFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            menu = getArguments().getParcelable(MENU_KEY);
+            menuId = getArguments().getString(MENU_KEY);
         }
     }
 
@@ -57,6 +59,8 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentMenuBinding fragmentMenuBinding = FragmentMenuBinding.inflate(getLayoutInflater());
         rvDishes = fragmentMenuBinding.rvDishes;
+        menu = new Menu(menuId, this);
+        Log.e(TAG, String.valueOf(menu.dishes.size()));
         adapter = new DishAdapter(getActivity(), menu.dishes);
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);
