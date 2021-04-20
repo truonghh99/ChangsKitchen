@@ -31,44 +31,53 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="5"
-                    android:gravity="center"
-                    >
+                    android:weightSum="3"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/tvName"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Dish 1"
-                        android:layout_weight="0.75"
                         android:textSize="13dp"
                         />
 
                     <TextView
                         android:id="@+id/tvNote"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Note"
                         android:textSize="13dp"
                         android:layout_weight="1.1"
-
                         android:gravity="center_horizontal" />
+
+                    <ImageView
+                        android:id="@+id/ivMinus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_minus"
+                        android:layout_toLeftOf="@+id/tvQuantity"/>
 
                     <TextView
                         android:id="@+id/tvQuantity"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="15"
-                        android:layout_weight="1"
-                        android:textSize="13dp"
-                        android:gravity="center_horizontal" />
+                        android:textSize="13dp" />
+
+                    <ImageView
+                        android:id="@+id/ivPlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_plus"
+                        android:layout_toRightOf="@+id/tvQuantity"/>
 
                     <TextView
                         android:id="@+id/tvTotal"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="25$"
@@ -77,12 +86,12 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal" />
 
-                    <CheckBox
-                        android:id="@+id/cbDelete"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/ivDelete"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.15"
                         android:clickable="false"
+                        android:src="@drawable/ic_trash"
                         />
                 </LinearLayout>
 
