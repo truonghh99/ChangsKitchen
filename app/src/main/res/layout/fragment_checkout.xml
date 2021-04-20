@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.CheckoutFragment">
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    tools:context=".fragments.CheckoutFragment"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rlSubtotal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvSubtotalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal: "
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvSubtotal"
+            android:layout_toRightOf="@id/tvSubtotalText"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25$"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTax"
+        android:layout_below="@id/rlSubtotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTaxText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tax: "
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvTax"
+            android:layout_toRightOf="@id/tvTaxText"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.5$"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTip"
+        android:layout_below="@id/rlTax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tip: "
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/etTip"
+            android:layout_toRightOf="@id/tvTip"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBaseline="@+id/tvTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="2.5"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlTotal"
+        android:layout_below="@id/rlTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTotalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: "
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_toRightOf="@id/tvTotalText"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="30$"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btOrder"
+        android:layout_below="@+id/rlTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_gradient"
+        android:text="Place Order"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:textSize="16sp"/>
+
+
+</RelativeLayout>
