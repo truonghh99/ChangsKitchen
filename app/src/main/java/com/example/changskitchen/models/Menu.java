@@ -27,21 +27,24 @@ public class Menu implements Parcelable {
     public String menuId;
     public Date date;
     public List<Dish> dishes;
+    public MenuFragment menuFragment;
 
     public Menu() {
     }
 
     public Menu(String id, final MenuFragment menuFragment) {
+        this.menuFragment = menuFragment;
         this.menuId = id;
+        final Menu thisMenu = this;
         dishes = new ArrayList<>();
         DatabaseReference dishRef = ref.child(id).child("dishes");
         ChildEventListener dishListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String dishId = (String) snapshot.getValue();
-                Dish dish = new Dish(dishId);
+                Dish dish = new Dish(dishId, thisMenu);
                 dishes.add(dish);
-                menuFragment.adapter.notifyDataSetChanged();
+                updateView();
             }
 
             @Override
@@ -62,6 +65,10 @@ public class Menu implements Parcelable {
             }
         };
         dishRef.addChildEventListener(dishListener);
+    }
+
+    public void updateView() {
+        menuFragment.adapter.notifyDataSetChanged();
     }
 
     protected Menu(Parcel in) {

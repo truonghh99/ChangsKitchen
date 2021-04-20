@@ -60,7 +60,6 @@ public class MenuFragment extends Fragment {
         FragmentMenuBinding fragmentMenuBinding = FragmentMenuBinding.inflate(getLayoutInflater());
         rvDishes = fragmentMenuBinding.rvDishes;
         menu = new Menu(menuId, this);
-        Log.e(TAG, String.valueOf(menu.dishes.size()));
         adapter = new DishAdapter(getActivity(), menu.dishes);
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);

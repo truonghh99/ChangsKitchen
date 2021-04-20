@@ -23,7 +23,7 @@ public class Dish {
     public Dish() {
     }
 
-    public Dish(final String dishId) {
+    public Dish(final String dishId, final Menu menu) {
         Log.e(TAG, "Fetching dish with id: " + dishId);
         this.dishId = dishId;
         DatabaseReference currRef = ref.child(dishId);
@@ -35,6 +35,7 @@ public class Dish {
                 name = dish.name;
                 description = dish.description;
                 price = dish.price;
+                menu.updateView();
             }
 
             @Override
