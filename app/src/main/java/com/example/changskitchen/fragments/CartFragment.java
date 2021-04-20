@@ -31,10 +31,8 @@ public class CartFragment extends Fragment {
     TextView tvDate;
     Button btCheckout;
     public CartFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static CartFragment newInstance() {
         CartFragment fragment = new CartFragment();
         Bundle args = new Bundle();
@@ -54,6 +52,7 @@ public class CartFragment extends Fragment {
         rvCartItems = fragmentCartBinding.rvCartItems;
         tvDate = fragmentCartBinding.tvDate;
         btCheckout = fragmentCartBinding.btCheckout;
+
 
         return fragmentCartBinding.getRoot();
     }
