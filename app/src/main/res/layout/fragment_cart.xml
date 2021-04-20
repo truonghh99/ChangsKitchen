@@ -5,10 +5,46 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CART FRAGMENT" />
+    <RelativeLayout android:background="#e1e1e1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            android:id="@+id/layout_total"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:weightSum="2">
+            <TextView android:gravity="center"
+                android:id="@+id/tvDate"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="Order date: 04/21/2021"
+                android:textSize="20dp">
+            </TextView>
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCartItems"
+            android:layout_above="@+id/btCheckout"
+            android:layout_below="@+id/layout_total"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <Button
+            android:id="@+id/btCheckout"
+            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:text="Checkout - 25$"
+            android:background="@drawable/button_gradient">
+        </Button>
+
+    </RelativeLayout>
 
 </FrameLayout>
