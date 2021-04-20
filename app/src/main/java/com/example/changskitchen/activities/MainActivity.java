@@ -9,11 +9,13 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ActivityMainBinding;
+import com.example.changskitchen.fragments.CartFragment;
 import com.example.changskitchen.fragments.ContactFragment;
 import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment historyFragment;
     private Fragment profileFragment;
     private Fragment contactFragment;
+    private Fragment cartFragment;
 
 
     private static Toolbar toolbar;
@@ -49,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     public static BottomNavigationView bottomNavigation;
     private static FragmentManager fragmentManager;
     private ActivityMainBinding activityMainBinding;
-    private com.example.changskitchen.models.Menu todayMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         historyFragment = HistoryFragment.newInstance();
         profileFragment = ProfileFragment.newInstance();
         contactFragment = ContactFragment.newInstance();
+        cartFragment = CartFragment.newInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
         toolbar = findViewById(R.id.toolbar);
@@ -81,13 +84,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.miLogout:
-                mAuth.signOut();
+            case R.id.miCart:
+                switchFragment(cartFragment, "Your Cart");
+                break;
             case R.id.miProfile:
                 switchFragment(profileFragment, "Your Profile");
-                bottomNavigation.getMenu().setGroupCheckable(0, false, true);
                 break;
         }
+        bottomNavigation.getMenu().setGroupCheckable(0, false, true);
         return super.onOptionsItemSelected(item);
     }
 
