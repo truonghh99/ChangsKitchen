@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +65,25 @@ public class DishFragment extends DialogFragment {
 
         tvName.setText(dish.name);
         tvDescription.setText(dish.description);
-        btAdd.setText("Add to Cart -" + dish.price + "$");
+        getTextForButton();
 
+        etQuantity.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    getTextForButton();
+                    return true;
+                }
+                return false;
+            }
+        });
         return fragmentDishBinding.getRoot();
+    }
+
+    private void getTextForButton() {
+        int quantity = Integer.valueOf(etQuantity.getText().toString());
+        float total = quantity * dish.price;
+        btAdd.setText("Add to Cart - " + total + "$");
     }
 }
