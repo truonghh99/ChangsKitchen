@@ -1,5 +1,7 @@
 package com.example.changskitchen.models;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -9,8 +11,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Dish {
 
+    final String TAG = "DishModel";
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+    DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("dishes");
 
     public String dishId;
     public String name;
@@ -21,11 +24,13 @@ public class Dish {
     }
 
     public Dish(final String dishId) {
+        Log.e(TAG, "Fetching dish with id: " + dishId);
         this.dishId = dishId;
         DatabaseReference currRef = ref.child(dishId);
         currRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e(TAG, dataSnapshot.toString());
                 Dish dish = dataSnapshot.getValue(Dish.class);
                 name = dish.name;
                 description = dish.description;
@@ -34,7 +39,6 @@ public class Dish {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
             }
         });
     }
