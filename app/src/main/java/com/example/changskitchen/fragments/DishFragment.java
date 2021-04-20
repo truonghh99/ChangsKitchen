@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentDishBinding;
@@ -25,6 +28,11 @@ public class DishFragment extends DialogFragment {
 
     private Dish dish;
     private FragmentDishBinding fragmentDishBinding;
+    private TextView tvName;
+    private TextView tvDescription;
+    private EditText etNote;
+    private EditText etQuantity;
+    private Button btAdd;
 
     public static DishFragment newInstance(Dish dish) {
         DishFragment fragment = new DishFragment();
@@ -46,7 +54,16 @@ public class DishFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentDishBinding = FragmentDishBinding.inflate(getLayoutInflater());
+        tvName = fragmentDishBinding.tvName;
+        tvDescription = fragmentDishBinding.tvDescription;
+        etNote = fragmentDishBinding.etNote;
+        etQuantity = fragmentDishBinding.etQuantity;
+        btAdd = fragmentDishBinding.btAdd;
 
-        return inflater.inflate(R.layout.fragment_dish, container, false);
+        tvName.setText(dish.name);
+        tvDescription.setText(dish.description);
+        btAdd.setText("Add to Cart -" + dish.price + "$");
+
+        return fragmentDishBinding.getRoot();
     }
 }
