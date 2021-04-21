@@ -20,6 +20,7 @@ import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentCheckoutBinding;
 import com.example.changskitchen.databinding.FragmentDishBinding;
 import com.example.changskitchen.models.Dish;
+import com.example.changskitchen.models.Order;
 import com.example.changskitchen.models.OrderItem;
 import com.example.changskitchen.storage.CurrentOrder;
 
@@ -87,6 +88,7 @@ public class CheckoutFragment extends DialogFragment {
         btOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Order order = new Order();
             }
         });
         return checkoutFragment.getRoot();
