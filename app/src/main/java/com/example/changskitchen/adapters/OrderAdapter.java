@@ -38,8 +38,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemDishBinding itemDishBinding = ItemDishBinding.inflate(layoutInflater, parent, false);
-        return new ViewHolder(itemDishBinding);
+        ItemOrderBinding itemOrderBinding = ItemOrderBinding.inflate(layoutInflater, parent, false);
+        return new ViewHolder(itemOrderBinding);
     }
 
     public OrderAdapter(Context context, List<Order> orders) {
