@@ -59,7 +59,7 @@ public class Order {
     public String getSummary() {
         String res = "";
         res += (int) items.get(0).quantity + " " + items.get(0).name;
-        for (int i = 0; i < items.size(); ++i) {
+        for (int i = 1; i < items.size(); ++i) {
             res += ", " + (int) items.get(i).quantity + " " + items.get(i).name;
         }
         return res;
