@@ -75,11 +75,11 @@ public class HistoryFragment extends Fragment {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final Query orders = ref.orderByChild("uid").equalTo(uid);
 
-        ChildEventListener orderListnener = new ChildEventListener() {
+        ChildEventListener orderListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Order order = snapshot.getValue(Order.class);
-                orderList.add(order);
+                orderList.add(0, order);
                 adapter.notifyDataSetChanged();
             }
 
@@ -100,6 +100,6 @@ public class HistoryFragment extends Fragment {
 
             }
         };
-        orders.addChildEventListener(orderListnener);
+        orders.addChildEventListener(orderListener);
     }
 }

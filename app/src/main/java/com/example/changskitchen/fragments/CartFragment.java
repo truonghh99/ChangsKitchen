@@ -84,11 +84,13 @@ public class CartFragment extends Fragment {
     }
 
     public static void updateAdapter() {
+        if (adapter == null) return;
         adapter.notifyDataSetChanged();
         updateDate();
     }
 
     public static void updateDate() {
+        if (tvDate == null) return;
         if (CurrentOrder.orderItems.isEmpty()) {
             tvDate.setText("Your cart is empty");
         } else {

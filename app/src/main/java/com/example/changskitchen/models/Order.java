@@ -58,9 +58,9 @@ public class Order {
 
     public String getSummary() {
         String res = "";
-        res += items.get(0).quantity + " " + items.get(0).name;
+        res += (int) items.get(0).quantity + " " + items.get(0).name;
         for (int i = 0; i < items.size(); ++i) {
-            res += ", " + items.get(i).quantity + " " + items.get(i).name;
+            res += ", " + (int) items.get(i).quantity + " " + items.get(i).name;
         }
         return res;
     }
