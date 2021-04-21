@@ -86,6 +86,8 @@ public class CheckoutFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Order order = new Order();
+                order.saveToDatabase();
+                dismiss();
             }
         });
         return checkoutFragment.getRoot();

@@ -22,7 +22,6 @@ public class Order {
     public float finalPrice;
     public String status;
 
-
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("orders");
 
@@ -36,5 +35,9 @@ public class Order {
         status = "Placed";
     }
 
+    public void saveToDatabase() {
+        DatabaseReference orderRef = ref.push();
+        orderRef.setValue(this);
+    }
 
 }
