@@ -6,7 +6,7 @@
     tools:context=".fragments.HistoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDishes"
+        android:id="@+id/rvOrders"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
