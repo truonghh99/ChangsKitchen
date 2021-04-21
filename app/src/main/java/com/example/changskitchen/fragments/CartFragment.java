@@ -40,9 +40,9 @@ public class CartFragment extends Fragment {
     private FragmentCartBinding fragmentCartBinding;
 
     RecyclerView rvCartItems;
-    TextView tvDate;
-    Button btCheckout;
-    OrderItemAdapter adapter;
+    static TextView tvDate;
+    static Button btCheckout;
+    static OrderItemAdapter adapter;
 
     public CartFragment() {
     }
@@ -66,8 +66,7 @@ public class CartFragment extends Fragment {
         rvCartItems = fragmentCartBinding.rvCartItems;
         tvDate = fragmentCartBinding.tvDate;
         btCheckout = fragmentCartBinding.btCheckout;
-
-        tvDate.setText("Order date: " + CurrentOrder.date);
+        updateDate();
         btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
 
         adapter = new OrderItemAdapter(getActivity(), CurrentOrder.orderItems, btCheckout);
@@ -84,5 +83,16 @@ public class CartFragment extends Fragment {
         return fragmentCartBinding.getRoot();
     }
 
+    public static void updateAdapter() {
+        adapter.notifyDataSetChanged();
+        updateDate();
+    }
 
+    public static void updateDate() {
+        if (CurrentOrder.orderItems.isEmpty()) {
+            tvDate.setText("Your cart is empty");
+        } else {
+            tvDate.setText("Order date: " + CurrentOrder.date);
+        }
+    }
 }

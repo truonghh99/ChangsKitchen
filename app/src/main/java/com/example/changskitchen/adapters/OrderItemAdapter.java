@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ItemMenuBinding;
 import com.example.changskitchen.databinding.ItemOrderItemBinding;
+import com.example.changskitchen.fragments.CartFragment;
+import com.example.changskitchen.fragments.CheckoutFragment;
 import com.example.changskitchen.models.OrderItem;
 import com.example.changskitchen.storage.CurrentOrder;
 
@@ -74,6 +76,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         CurrentOrder.totalPrice -= CurrentOrder.orderItems.get(position).price;
         CurrentOrder.orderItems.remove(position);
         notifyDataSetChanged();
+        CartFragment.updateDate();
         btCheckout.setText("Checkout - " + CurrentOrder.totalPrice + "$");
     }
 

@@ -87,6 +87,8 @@ public class CheckoutFragment extends DialogFragment {
             public void onClick(View v) {
                 Order order = new Order();
                 order.saveToDatabase();
+                CurrentOrder.clear();
+                CartFragment.updateAdapter();
                 dismiss();
             }
         });

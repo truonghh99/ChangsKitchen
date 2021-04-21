@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.changskitchen.fragments.CartFragment;
 import com.example.changskitchen.models.OrderItem;
 
 import java.text.DateFormat;
@@ -34,8 +35,17 @@ public class CurrentOrder {
         } else {
             Toast.makeText(context, "Please check out or clear your current cart before ordering from a different menu", Toast.LENGTH_LONG).show();
         }
+        CartFragment.updateDate();
     }
 
+    public static void clear() {
+        orderItems.clear();
+        menuId = null;
+        tax = 0;
+        tip = 0;
+        totalPrice = 0;
+        finalPrice = 0;
+    }
     private static String convertToDate(String menuId) {
         Date date = new Date();
         try {
@@ -46,4 +56,5 @@ public class CurrentOrder {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         return dateFormat.format(date);
     }
+
 }
