@@ -1,6 +1,7 @@
 package com.example.changskitchen.models;
 import androidx.annotation.NonNull;
 
+import com.example.changskitchen.storage.CurrentOrder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,7 +19,7 @@ public class Order {
     public String date;
     public float tax;
     public float tip;
-    public float totalPrice;
+    public float finalPrice;
     public String status;
 
 
@@ -27,6 +28,12 @@ public class Order {
 
     public Order(){
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        items = CurrentOrder.orderItems;
+        date = CurrentOrder.menuId;
+        tax = CurrentOrder.tax;
+        tip = CurrentOrder.tip;
+        finalPrice = CurrentOrder.finalPrice;
+        status = "Placed";
     }
 
 

@@ -18,7 +18,10 @@ public class CurrentOrder {
     public static String menuId = null;
     public static String date = "4/21/2021";
     public static List<OrderItem> orderItems = new ArrayList<>();
+    public static float tax;
+    public static float tip;
     public static float totalPrice;
+    public static float finalPrice;
 
     public static void addItem(OrderItem orderItem, String id, Context context) {
         if (orderItems.isEmpty() || menuId == id) {

@@ -39,9 +39,6 @@ public class CheckoutFragment extends DialogFragment {
     private EditText etTip;
     private TextView tvTotal;
     private Button btOrder;
-    private float tax;
-    private float tip;
-    private float finalPrice;
 
     public static DishFragment newInstance(Dish dish, String menuId) {
         DishFragment fragment = new DishFragment();
@@ -63,21 +60,21 @@ public class CheckoutFragment extends DialogFragment {
         tvTotal = checkoutFragment.tvTotal;
         btOrder = checkoutFragment.btOrder;
 
-        tax = (float) (CurrentOrder.totalPrice * 0.1);
-        tip = (float) ((CurrentOrder.totalPrice + tax) * 0.2);
+        CurrentOrder.tax = (float) (CurrentOrder.totalPrice * 0.1);
+        CurrentOrder.tip = (float) ((CurrentOrder.totalPrice + CurrentOrder.tax) * 0.2);
         calculateFinalPrice();
 
         tvSubtotal.setText(String.valueOf(CurrentOrder.totalPrice));
-        tvTax.setText(String.valueOf(tax));
-        etTip.setText(String.valueOf(tip));
-        tvTotal.setText(String.valueOf(finalPrice));
+        tvTax.setText(String.valueOf(CurrentOrder.tax));
+        etTip.setText(String.valueOf(CurrentOrder.tip));
+        tvTotal.setText(String.valueOf(CurrentOrder.finalPrice));
 
         etTip.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    tip = Float.valueOf(etTip.getText().toString());
+                    CurrentOrder.tip = Float.valueOf(etTip.getText().toString());
                     calculateFinalPrice();
                     return true;
                 }
@@ -95,7 +92,7 @@ public class CheckoutFragment extends DialogFragment {
     }
 
     private void calculateFinalPrice() {
-        finalPrice = (float) tax + tip + CurrentOrder.totalPrice;
-        tvTotal.setText(String.valueOf(finalPrice));
+        CurrentOrder.finalPrice = (float) CurrentOrder.tax + CurrentOrder.tip + CurrentOrder.totalPrice;
+        tvTotal.setText(String.valueOf(CurrentOrder.finalPrice));
     }
 }
