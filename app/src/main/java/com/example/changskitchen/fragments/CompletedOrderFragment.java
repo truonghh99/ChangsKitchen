@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.changskitchen.R;
+import com.example.changskitchen.databinding.FragmentCompletedOrderBinding;
 import com.example.changskitchen.models.Order;
 
 /**
@@ -19,6 +20,7 @@ import com.example.changskitchen.models.Order;
 public class CompletedOrderFragment extends Fragment {
 
     final static String ORDER_KEY = "ORDER";
+    FragmentCompletedOrderBinding fragmentCompletedOrderBinding;
     Order order;
 
     public CompletedOrderFragment() {
@@ -37,15 +39,14 @@ public class CompletedOrderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            this.order = getArguments().getParcelable(ORDER_KEY);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        fragmentCompletedOrderBinding = FragmentCompletedOrderBinding.inflate(getLayoutInflater());
         return inflater.inflate(R.layout.fragment_completed_order, container, false);
     }
 }

@@ -23,6 +23,7 @@ import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.databinding.ItemDishBinding;
 import com.example.changskitchen.databinding.ItemOrderBinding;
 import com.example.changskitchen.databinding.ItemOrderItemBinding;
+import com.example.changskitchen.fragments.CompletedOrderFragment;
 import com.example.changskitchen.fragments.DishFragment;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.Order;
@@ -80,6 +81,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             tvPrice.setText("" + order.finalPrice + '$');
             if (order.status.equals("COMPLETED")) {
                 cvOrder.setCardBackgroundColor(Color.parseColor("#f2dc96"));
+                cvOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CompletedOrderFragment fragment = CompletedOrderFragment.newInstance(order);
+                        MainActivity.switchFragment(fragment, "Completed Order");
+                    }
+                });
             } else {
                 cvOrder.setCardBackgroundColor(Color.parseColor("#d8eaab"));
             }
