@@ -78,10 +78,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             tvDate.setText(order.getStringDate());
             tvSummary.setText(order.getSummary());
             tvPrice.setText("" + order.finalPrice + '$');
-            if (order.status == "COMPLETED") {
-                cvOrder.setCardBackgroundColor(Color.parseColor("#fdffb6"));
+            if (order.status.equals("COMPLETED")) {
+                cvOrder.setCardBackgroundColor(Color.parseColor("#f2dc96"));
             } else {
-                cvOrder.setCardBackgroundColor(Color.parseColor("#f1dca7"));
+                cvOrder.setCardBackgroundColor(Color.parseColor("#d8eaab"));
             }
         }
     }
