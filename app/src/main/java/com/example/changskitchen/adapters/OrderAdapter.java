@@ -26,6 +26,7 @@ import com.example.changskitchen.databinding.ItemOrderItemBinding;
 import com.example.changskitchen.fragments.CompletedOrderFragment;
 import com.example.changskitchen.fragments.DishFragment;
 import com.example.changskitchen.fragments.PlacedOrderFragment;
+import com.example.changskitchen.helpers.DateHelper;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.Order;
 
@@ -86,7 +87,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     @Override
                     public void onClick(View v) {
                         CompletedOrderFragment fragment = CompletedOrderFragment.newInstance(order);
-                        MainActivity.switchFragment(fragment, "Completed Order");
+                        MainActivity.switchFragment(fragment, DateHelper.convertToDate(order.date));
                     }
                 });
             } else {
