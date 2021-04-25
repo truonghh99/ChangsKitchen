@@ -25,6 +25,7 @@ import com.example.changskitchen.databinding.ItemOrderBinding;
 import com.example.changskitchen.databinding.ItemOrderItemBinding;
 import com.example.changskitchen.fragments.CompletedOrderFragment;
 import com.example.changskitchen.fragments.DishFragment;
+import com.example.changskitchen.fragments.PlacedOrderFragment;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.Order;
 
@@ -90,6 +91,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 });
             } else {
                 cvOrder.setCardBackgroundColor(Color.parseColor("#d8eaab"));
+                cvOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PlacedOrderFragment fragment = PlacedOrderFragment.newInstance(order);
+                        MainActivity.switchFragment(fragment, "Current Order");
+                    }
+                });
             }
         }
     }

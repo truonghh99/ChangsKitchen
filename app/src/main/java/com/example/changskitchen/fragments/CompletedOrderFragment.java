@@ -47,6 +47,6 @@ public class CompletedOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentCompletedOrderBinding = FragmentCompletedOrderBinding.inflate(getLayoutInflater());
-        return inflater.inflate(R.layout.fragment_completed_order, container, false);
+        return fragmentCompletedOrderBinding.getRoot();
     }
 }
