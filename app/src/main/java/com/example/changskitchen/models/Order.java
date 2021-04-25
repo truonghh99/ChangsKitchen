@@ -1,4 +1,6 @@
 package com.example.changskitchen.models;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -18,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Order {
+public class Order implements Parcelable {
 
     public String uid;
     public List<OrderItem> items;
@@ -40,6 +42,28 @@ public class Order {
         finalPrice = CurrentOrder.finalPrice;
         status = "PLACED";
     }
+
+    protected Order(Parcel in) {
+        uid = in.readString();
+        items = in.createTypedArrayList(OrderItem.CREATOR);
+        date = in.readString();
+        tax = in.readFloat();
+        tip = in.readFloat();
+        finalPrice = in.readFloat();
+        status = in.readString();
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
 
     public void saveToDatabase() {
         DatabaseReference orderRef = ref.push();
@@ -63,5 +87,21 @@ public class Order {
             res += ", " + (int) items.get(i).quantity + " " + items.get(i).name;
         }
         return res;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uid);
+        dest.writeTypedList(items);
+        dest.writeString(date);
+        dest.writeFloat(tax);
+        dest.writeFloat(tip);
+        dest.writeFloat(finalPrice);
+        dest.writeString(status);
     }
 }
