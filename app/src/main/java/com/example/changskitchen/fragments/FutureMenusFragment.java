@@ -13,10 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.changskitchen.R;
 import com.example.changskitchen.adapters.MenuAdapter;
 import com.example.changskitchen.databinding.FragmentFutureMenusBinding;
-import com.example.changskitchen.models.Dish;
+import com.example.changskitchen.helpers.DateHelper;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,7 +70,7 @@ public class FutureMenusFragment extends Fragment {
     }
 
     private void getMenuIdList() {
-        String today = "20210421";
+        String today = DateHelper.convertToMenuId(new Date());
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("menus");
         Query futureMenusQuery = ref.orderByKey().startAt(today);

@@ -1,6 +1,7 @@
 package com.example.changskitchen.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,6 +78,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             tvDate.setText(order.getStringDate());
             tvSummary.setText(order.getSummary());
             tvPrice.setText("" + order.finalPrice + '$');
+            if (order.status == "COMPLETED") {
+                cvOrder.setCardBackgroundColor(Color.parseColor("#fdffb6"));
+            } else {
+                cvOrder.setCardBackgroundColor(Color.parseColor("#f1dca7"));
+            }
         }
     }
 

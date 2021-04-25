@@ -31,7 +31,6 @@ public class MenuFragment extends Fragment {
     private static final String MENU_KEY = "MenuKey";
     String menuId;
     private Menu menu;
-    private List<Dish> dishes = new ArrayList<>();
     private RecyclerView rvDishes;
     public DishAdapter adapter;
 

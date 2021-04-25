@@ -7,9 +7,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,16 +19,9 @@ import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
 import com.example.changskitchen.fragments.ProfileFragment;
-import com.example.changskitchen.models.Dish;
+import com.example.changskitchen.helpers.DateHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.Nullable;
 
 import java.util.Date;
 
@@ -60,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(activityMainBinding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
-        currentMenuFragment = MenuFragment.newInstance("202104"); // to be updated to current date
+        currentMenuFragment = MenuFragment.newInstance(DateHelper.convertToMenuId(new Date()));
         futureMenusFragment = FutureMenusFragment.newInstance();
         historyFragment = HistoryFragment.newInstance();
         profileFragment = ProfileFragment.newInstance();
@@ -76,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }

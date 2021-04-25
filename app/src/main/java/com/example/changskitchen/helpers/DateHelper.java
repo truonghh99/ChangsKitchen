@@ -7,15 +7,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class dateHelper {
+public class DateHelper {
 
     public static String convertToMenuId(Date date) {
-        try {
-            date = new SimpleDateFormat("yyyyMMdd").parse(menuId);
-        } catch (ParseException e) {
-        }
-        DateFormat dateFormat =new SimpleDateFormat("EEEE");
-        return dateFormat.format(date);
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String strDate = dateFormat.format(date);
+        return strDate;
     }
 
     public static String convertToWeekDay(String menuId) {

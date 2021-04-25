@@ -38,7 +38,7 @@ public class Order {
         tax = CurrentOrder.tax;
         tip = CurrentOrder.tip;
         finalPrice = CurrentOrder.finalPrice;
-        status = "Placed";
+        status = "PLACED";
     }
 
     public void saveToDatabase() {

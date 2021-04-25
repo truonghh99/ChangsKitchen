@@ -1,34 +1,20 @@
 package com.example.changskitchen.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.databinding.ItemMenuBinding;
 import com.example.changskitchen.fragments.MenuFragment;
-import com.example.changskitchen.helpers.dateHelper;
-import com.example.changskitchen.models.Dish;
+import com.example.changskitchen.helpers.DateHelper;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
@@ -75,15 +61,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         }
 
         public void bind(final String menuId) {
-            String date = dateHelper.convertToDate(menuId);
-            String weekday = dateHelper.convertToWeekDay(menuId);
+            String date = DateHelper.convertToDate(menuId);
+            String weekday = DateHelper.convertToWeekDay(menuId);
             tvWeekDay.setText(weekday);
             tvDate.setText(date);
             cvMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     MenuFragment newFragment = MenuFragment.newInstance(menuId);
-                    MainActivity.switchFragment(newFragment, dateHelper.convertToDate(menuId));
+                    MainActivity.switchFragment(newFragment, DateHelper.convertToDate(menuId));
                 }
             });
         }
