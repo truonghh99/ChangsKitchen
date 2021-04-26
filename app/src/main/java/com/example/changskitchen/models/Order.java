@@ -89,6 +89,15 @@ public class Order implements Parcelable {
         return res;
     }
 
+    public String getSummaryPrice() {
+        String res = "";
+        res += (int) items.get(0).price;
+        for (int i = 1; i < items.size(); ++i) {
+            res += "\n" + items.get(i).price;
+        }
+        return res;
+    }
+
     @Override
     public int describeContents() {
         return 0;

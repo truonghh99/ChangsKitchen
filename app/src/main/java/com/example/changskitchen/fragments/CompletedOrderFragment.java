@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentCompletedOrderBinding;
 import com.example.changskitchen.models.Order;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +25,8 @@ public class CompletedOrderFragment extends Fragment {
     final static String ORDER_KEY = "ORDER";
     FragmentCompletedOrderBinding fragmentCompletedOrderBinding;
     Order order;
+    String dishNames;
+    String dishPrices;
 
     public CompletedOrderFragment() {
         // Required empty public constructor
@@ -47,6 +52,24 @@ public class CompletedOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentCompletedOrderBinding = FragmentCompletedOrderBinding.inflate(getLayoutInflater());
+        dishNames = order.getSummary().replace(", ", "\n");
+        dishPrices = order.getSummaryPrice();
+        String tip = String.valueOf(order.tip);
+        String tax = String.valueOf(order.tax);
+        String total = String.valueOf(order.finalPrice);
+
+        TextView tvDishName = fragmentCompletedOrderBinding.tvDishName;
+        TextView tvDishPrice = fragmentCompletedOrderBinding.tvDishNamePrice;
+        TextView tvTip = fragmentCompletedOrderBinding.tvTipValue;
+        TextView tvTax = fragmentCompletedOrderBinding.tvTaxValue;
+        TextView tvTotal = fragmentCompletedOrderBinding.tvTotalValue;
+
+        tvDishName.setText(dishNames);
+        tvDishPrice.setText(dishPrices);
+        tvTip.setText(tip);
+        tvTax.setText(tax);
+        tvTotal.setText(total);
+        
         return fragmentCompletedOrderBinding.getRoot();
     }
 }
