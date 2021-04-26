@@ -20,6 +20,7 @@ import com.example.changskitchen.fragments.FutureMenusFragment;
 import com.example.changskitchen.fragments.HistoryFragment;
 import com.example.changskitchen.fragments.ProfileFragment;
 import com.example.changskitchen.helpers.DateHelper;
+import com.example.changskitchen.storage.CurrentOrder;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Your Profile");
         setSupportActionBar(toolbar);
         setUpBottomBar();
+        CurrentOrder.fetchAvailableDish(DateHelper.convertToMenuId(new Date()));
     }
 
     @Override

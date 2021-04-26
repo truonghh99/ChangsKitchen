@@ -4,14 +4,25 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.changskitchen.fragments.CartFragment;
+import com.example.changskitchen.models.Dish;
+import com.example.changskitchen.models.Menu;
 import com.example.changskitchen.models.OrderItem;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.Nullable;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class CurrentOrder {
@@ -23,10 +34,12 @@ public class CurrentOrder {
     public static float tip;
     public static float totalPrice;
     public static float finalPrice;
+    public static HashMap<String, Dish> menuMap = new HashMap<>();
 
     public static void addItem(OrderItem orderItem, String id, Context context) {
         if (orderItems.isEmpty() || menuId == id) {
             menuId = id;
+            fetchAvailableDish(menuId);
             date = convertToDate(menuId);
             orderItems.add(orderItem);
             totalPrice += orderItem.price;
@@ -57,4 +70,47 @@ public class CurrentOrder {
         return dateFormat.format(date);
     }
 
+    public static void fetchAvailableDish(String id) {
+        Log.e(TAG, "Fetching from " + id);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("menus");
+        DatabaseReference dishRef = ref.child(id).child("dishes");
+        ChildEventListener dishListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String dishId = (String) snapshot.getValue();
+                Dish dish = new Dish(dishId);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        dishRef.addChildEventListener(dishListener);
+    }
+
+    public static void addItem(OrderItem orderItem, String id) {
+        if (orderItems.isEmpty() || menuId == id) {
+            menuId = id;
+            fetchAvailableDish(menuId);
+            date = convertToDate(menuId);
+            orderItems.add(orderItem);
+            totalPrice += orderItem.price;
+            Log.e(TAG, String.valueOf(orderItems.size()));
+        }
+        CartFragment.updateDate();
+    }
 }

@@ -17,6 +17,7 @@ import com.google.firebase.database.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class Menu implements Parcelable {
@@ -68,6 +69,7 @@ public class Menu implements Parcelable {
     }
 
     public void updateView() {
+        if (menuFragment == null) return;
         menuFragment.adapter.notifyDataSetChanged();
     }
 

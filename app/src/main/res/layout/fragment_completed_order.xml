@@ -132,7 +132,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btCheckout"
+        android:id="@+id/btReorder"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_height="60dp"

@@ -4,16 +4,24 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.FragmentCompletedOrderBinding;
+import com.example.changskitchen.helpers.DateHelper;
+import com.example.changskitchen.models.Menu;
 import com.example.changskitchen.models.Order;
+import com.example.changskitchen.storage.CurrentOrder;
 
 import org.w3c.dom.Text;
+
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,7 @@ import org.w3c.dom.Text;
 public class CompletedOrderFragment extends Fragment {
 
     final static String ORDER_KEY = "ORDER";
+    private static final String TAG = "CompletedOrderFragment";
     FragmentCompletedOrderBinding fragmentCompletedOrderBinding;
     Order order;
     String dishNames;
@@ -63,13 +72,34 @@ public class CompletedOrderFragment extends Fragment {
         TextView tvTip = fragmentCompletedOrderBinding.tvTipValue;
         TextView tvTax = fragmentCompletedOrderBinding.tvTaxValue;
         TextView tvTotal = fragmentCompletedOrderBinding.tvTotalValue;
+        Button btReorder = fragmentCompletedOrderBinding.btReorder;
 
         tvDishName.setText(dishNames);
         tvDishPrice.setText(dishPrices);
         tvTip.setText(tip);
         tvTax.setText(tax);
         tvTotal.setText(total);
-        
+        btReorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reorder();
+            }
+        });
+
         return fragmentCompletedOrderBinding.getRoot();
+    }
+
+    private void reorder() {
+        if (CurrentOrder.menuId == null) CurrentOrder.menuId = DateHelper.convertToMenuId(new Date());
+        int added = 0;
+        for (int i = 0; i < order.items.size(); ++i) {
+            Log.e(TAG, order.items.get(i).name);
+            if (CurrentOrder.menuMap.containsKey(order.items.get(i).name)) {
+                CurrentOrder.addItem(order.items.get(i), CurrentOrder.menuId);
+                ++added;
+            }
+        }
+        Toast.makeText(getContext(), "Added " + added + " items to your car. The rest is not available in the current menu",
+                        Toast.LENGTH_LONG).show();
     }
 }

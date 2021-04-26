@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.example.changskitchen.storage.CurrentOrder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,28 @@ public class Dish implements Parcelable {
     public float price;
 
     public Dish() {
+    }
+
+    public Dish(final String dishId) {
+        Log.e(TAG, "Fetching dish with id: " + dishId);
+        this.dishId = dishId;
+        DatabaseReference currRef = ref.child(dishId);
+        currRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e(TAG, dataSnapshot.toString());
+                Dish dish = dataSnapshot.getValue(Dish.class);
+                name = dish.name;
+                description = dish.description;
+                price = dish.price;
+                CurrentOrder.menuMap.put(dish.name, dish);
+                Log.e(TAG, "Fetched " + dish.name);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     public Dish(final String dishId, final Menu menu) {
