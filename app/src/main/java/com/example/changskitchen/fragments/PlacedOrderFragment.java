@@ -66,7 +66,7 @@ public class PlacedOrderFragment extends Fragment {
         view_order_processed = fragmentPlacedOrderBinding.viewOrderProcessed;
         view_order_pickup = fragmentPlacedOrderBinding.viewOrderPickup;
         placed_divider = fragmentPlacedOrderBinding.placedDivider;
-        con_divider = fragmentPlacedOrderBinding.placedDivider;
+        con_divider = fragmentPlacedOrderBinding.conDivider;
         ready_divider = fragmentPlacedOrderBinding.readyDivider;
 
         textorderpickup = fragmentPlacedOrderBinding.textorderpickup;
