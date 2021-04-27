@@ -96,7 +96,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     @Override
                     public void onClick(View v) {
                         PlacedOrderFragment fragment = PlacedOrderFragment.newInstance(order);
-                        MainActivity.switchFragment(fragment, "Current Order");
+                        MainActivity.switchFragment(fragment, "Tracking order " + DateHelper.convertToDate(order.date));
                     }
                 });
             }
