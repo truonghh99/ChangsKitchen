@@ -22,6 +22,7 @@ import java.util.List;
 
 public class Order implements Parcelable {
 
+    public String orderId;
     public String uid;
     public List<OrderItem> items;
     public String date;

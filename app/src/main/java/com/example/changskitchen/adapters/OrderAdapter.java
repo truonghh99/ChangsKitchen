@@ -87,7 +87,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     @Override
                     public void onClick(View v) {
                         CompletedOrderFragment fragment = CompletedOrderFragment.newInstance(order);
-                        MainActivity.switchFragment(fragment, DateHelper.convertToDate(order.date));
+                        MainActivity.switchFragment(fragment, order.orderId.replace('-', '#'));
                     }
                 });
             } else {
@@ -96,7 +96,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     @Override
                     public void onClick(View v) {
                         PlacedOrderFragment fragment = PlacedOrderFragment.newInstance(order);
-                        MainActivity.switchFragment(fragment, "Tracking order " + DateHelper.convertToDate(order.date));
+                        MainActivity.switchFragment(fragment, order.orderId.replace('-', '#'));
                     }
                 });
             }

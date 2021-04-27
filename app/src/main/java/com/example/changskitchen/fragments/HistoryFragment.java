@@ -79,6 +79,7 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Order order = snapshot.getValue(Order.class);
+                order.orderId = snapshot.getKey();
                 orderList.add(0, order);
                 adapter.notifyDataSetChanged();
             }
