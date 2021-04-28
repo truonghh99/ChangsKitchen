@@ -111,10 +111,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                etName.setText(user.name);
-                etEmail.setText(user.email);
-                etPassword.setText(user.password);
-                etPhone.setText(user.phone);
+                if (user.name != null) etName.setText(user.name);
+                if (user.email != null) etEmail.setText(user.email);
+                if (user.password != null) etPassword.setText(user.password);
+                if (user.phone != null) etPhone.setText(user.phone);
             }
 
             @Override
