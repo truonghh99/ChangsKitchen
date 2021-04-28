@@ -248,5 +248,15 @@
         app:layout_constraintStart_toStartOf="@+id/view_order_processed"
         app:layout_constraintTop_toBottomOf="@id/view_order_processed" />
 
-
+    <Button
+        android:id="@+id/btRegister"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="50dp"
+        android:background="@drawable/button_gradient"
+        android:text="Contact Restaurant"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/pickup_desc"
+        tools:layout_editor_absoluteX="48dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
