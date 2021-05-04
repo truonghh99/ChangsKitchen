@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         futureMenusFragment = FutureMenusFragment.newInstance();
         historyFragment = HistoryFragment.newInstance();
         profileFragment = ProfileFragment.newInstance();
-        contactFragment = ContactFragment.newInstance();
+        contactFragment = ContactFragment.newInstance("");
         cartFragment = CartFragment.newInstance();
 
         bottomNavigation = findViewById(R.id.bottomNavigation);

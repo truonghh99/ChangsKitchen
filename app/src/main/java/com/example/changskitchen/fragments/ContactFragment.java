@@ -1,5 +1,7 @@
 package com.example.changskitchen.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -67,6 +69,17 @@ public class ContactFragment extends Fragment {
         etOrderId = fragmentContactBinding.etOrderId;
         btCall = fragmentContactBinding.btCall;
         btSend = fragmentContactBinding.btSend;
+
+        if (!orderId.isEmpty()) etOrderId.setText(orderId);
+
+        btCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:+84913989706"));
+                startActivity(intent);
+            }
+        });
 
         return fragmentContactBinding.getRoot();
     }
