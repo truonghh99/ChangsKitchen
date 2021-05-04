@@ -54,9 +54,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="Your message"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    android:inputType="textMultiLine"
+                    android:minLines="4"
                     android:paddingLeft="5dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
