@@ -1,5 +1,6 @@
 package com.example.changskitchen.fragments;
 
+import android.content.ContentUris;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.adapters.DishAdapter;
@@ -21,6 +23,14 @@ import com.example.changskitchen.databinding.FragmentContactBinding;
 import com.example.changskitchen.databinding.FragmentMenuBinding;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.Menu;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.MessageDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +88,29 @@ public class ContactFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:+84913989706"));
                 startActivity(intent);
+            }
+        });
+
+        btSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderId = etOrderId.getText().toString();
+                String message = etMessage.getText().toString();
+                if (!orderId.isEmpty()) {
+                    message = "About order: " + orderId + "\n" + message;
+                }
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+                sendIntent.setType("text/plain");
+                sendIntent.setPackage("com.facebook.orca");
+
+                try {
+                    startActivity(sendIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(getActivity(), "Please Install Facebook Messenger", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

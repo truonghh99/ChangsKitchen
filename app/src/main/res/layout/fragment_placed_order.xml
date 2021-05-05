@@ -249,7 +249,7 @@
         app:layout_constraintTop_toBottomOf="@id/view_order_processed" />
 
     <Button
-        android:id="@+id/btRegister"
+        android:id="@+id/btContact"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="50dp"

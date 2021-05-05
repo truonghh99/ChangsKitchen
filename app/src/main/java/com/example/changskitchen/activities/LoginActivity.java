@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         callbackManager = CallbackManager.Factory.create();
-        btLoginFb.setPermissions(Arrays.asList("email"));
+        btLoginFb.setPermissions(Arrays.asList("email", "pages_messaging"));
 
         btLoginFb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.changskitchen.R;
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.databinding.FragmentCompletedOrderBinding;
 import com.example.changskitchen.databinding.FragmentPlacedOrderBinding;
 import com.example.changskitchen.models.Order;
@@ -32,6 +34,7 @@ public class PlacedOrderFragment extends Fragment {
     View con_divider;
     View ready_divider;
 
+    Button btContact;
     TextView textorderpickup;
     TextView text_confirmed;
     TextView textorderprocessed;
@@ -68,11 +71,18 @@ public class PlacedOrderFragment extends Fragment {
         placed_divider = fragmentPlacedOrderBinding.placedDivider;
         con_divider = fragmentPlacedOrderBinding.conDivider;
         ready_divider = fragmentPlacedOrderBinding.readyDivider;
+        btContact = fragmentPlacedOrderBinding.btContact;
 
         textorderpickup = fragmentPlacedOrderBinding.textorderpickup;
         text_confirmed = fragmentPlacedOrderBinding.textConfirmed;
         textorderprocessed = fragmentPlacedOrderBinding.textorderprocessed;
 
+        btContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.switchToContactFragment(order.orderId);
+            }
+        });
 
         getOrderStatus(order.status);
         return fragmentPlacedOrderBinding.getRoot();
@@ -146,6 +156,7 @@ public class PlacedOrderFragment extends Fragment {
         view_order_pickup.setBackground(getResources().getDrawable(R.drawable.shape_status_current));
         ready_divider.setBackground(getResources().getDrawable(R.drawable.shape_status_current));
         textorderpickup.setAlpha(myf);
+
 
     }
 

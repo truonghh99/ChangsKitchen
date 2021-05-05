@@ -135,6 +135,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(title);
     }
 
+    public static void switchToContactFragment(String orderId) {
+        Fragment contactFragment = ContactFragment.newInstance(orderId);
+        fragmentManager.beginTransaction()
+                .replace(R.id.flContainer, contactFragment)
+                .addToBackStack(null)
+                .commit();
+        toolbar.setTitle("Contact Restaurant");
+    }
+
     public static void showDialogFragment(DialogFragment fragment, String tag) {
         fragment.show(fragmentManager, tag);
     }
