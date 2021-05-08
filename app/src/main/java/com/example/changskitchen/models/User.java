@@ -22,7 +22,7 @@ import java.util.Map;
 public class User {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+    DatabaseReference ref = database.getReference();
 
     public String uid;
     public String email;

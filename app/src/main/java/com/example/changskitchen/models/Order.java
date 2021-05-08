@@ -32,7 +32,7 @@ public class Order implements Parcelable {
     public String status;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("orders");
+    DatabaseReference ref = database.getReference().child("orders");
 
     public Order(){
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();

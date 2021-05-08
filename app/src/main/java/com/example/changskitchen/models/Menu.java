@@ -23,7 +23,7 @@ import java.util.List;
 public class Menu implements Parcelable {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("menus");
+    DatabaseReference ref = database.getReference().child("menus");
 
     public String menuId;
     public Date date;

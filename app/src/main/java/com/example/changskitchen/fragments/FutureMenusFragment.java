@@ -72,7 +72,7 @@ public class FutureMenusFragment extends Fragment {
     private void getMenuIdList() {
         String today = DateHelper.convertToMenuId(new Date());
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("menus");
+        DatabaseReference ref = database.getReference().child("menus");
         Query futureMenusQuery = ref.orderByKey().startAt(today);
         futureMenusQuery.addChildEventListener(new ChildEventListener() {
             @Override

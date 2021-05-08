@@ -16,7 +16,7 @@ public class Dish implements Parcelable {
 
     private final String TAG = "DishModel";
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("dishes");
+    DatabaseReference ref = database.getReference().child("dishes");
 
     public String dishId;
     public String name;

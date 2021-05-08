@@ -40,7 +40,7 @@ public class HistoryFragment extends Fragment {
     private OrderAdapter adapter;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("orders");
+    DatabaseReference ref = database.getReference().child("orders");
 
     public HistoryFragment() {
     }

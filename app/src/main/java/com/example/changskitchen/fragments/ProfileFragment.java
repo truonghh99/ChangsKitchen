@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment {
     public void getInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+        DatabaseReference ref = database.getReference();
         DatabaseReference usersRef = ref.child("users").child(user.getUid());
         ValueEventListener postListener = new ValueEventListener() {
             @Override
