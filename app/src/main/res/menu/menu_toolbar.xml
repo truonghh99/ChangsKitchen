@@ -16,7 +16,8 @@
     <item
         android:id="@+id/miSearch"
         android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom"
-        android:title="PROFILE">
+        android:title="SEARCH"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView">
     </item>
 </menu>

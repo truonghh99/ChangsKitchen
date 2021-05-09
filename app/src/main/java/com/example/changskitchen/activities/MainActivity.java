@@ -34,12 +34,12 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private Fragment currentMenuFragment;
-    private Fragment futureMenusFragment;
-    private Fragment historyFragment;
-    private Fragment profileFragment;
-    private Fragment contactFragment;
-    private Fragment cartFragment;
+    private MenuFragment currentMenuFragment;
+    private FutureMenusFragment futureMenusFragment;
+    private HistoryFragment historyFragment;
+    private ProfileFragment profileFragment;
+    private ContactFragment contactFragment;
+    private CartFragment cartFragment;
 
 
     private static Toolbar toolbar;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private String title;
 
     public static BottomNavigationView bottomNavigation;
-    public static SearchView searchView;
+    public SearchView searchView;
     private static FragmentManager fragmentManager;
     private ActivityMainBinding activityMainBinding;
 
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Your Profile");
         setSupportActionBar(toolbar);
-        setUpBottomBar();
         CurrentOrder.fetchAvailableDish(DateHelper.convertToMenuId(new Date()));
+        setUpBottomBar();
     }
 
     @Override
@@ -78,7 +78,23 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         MenuItem searchItem = menu.findItem(R.id.miSearch);
         searchView = (SearchView) searchItem.getActionView();
+        setUpSearchBar();
         return true;
+    }
+
+    private void setUpSearchBar() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                currentMenuFragment.adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     @Override

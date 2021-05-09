@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,15 +25,44 @@ import com.example.changskitchen.databinding.ItemDishBinding;
 import com.example.changskitchen.fragments.DishFragment;
 import com.example.changskitchen.models.Dish;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
+public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "CurrentFoodAdapter";
     private Context context;
     public static List<Dish> dishes;
+    public static List<Dish> dishesFull;
     private String menuId;
 
+    private Filter filter = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Dish> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(dishesFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (Dish dish : dishesFull) {
+                    if (dish.name.toLowerCase().contains(filterPattern)) {
+                        filteredList.add(dish);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            dishes.clear();
+            dishes.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,9 +71,15 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         return new ViewHolder(itemDishBinding);
     }
 
+    public void updateFullList(List<Dish> dishes) {
+        dishesFull = dishes;
+        Log.e(TAG, "FULL SIZE: " + dishesFull.size());
+    }
+
+
     public DishAdapter(Context context, List<Dish> dishes, String menuId) {
         this.context = context;
-        this.dishes = dishes;
+        this.dishes = new ArrayList<>(dishes);
         this.menuId = menuId;
     }
 
@@ -55,6 +92,11 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return dishes.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -62,25 +62,10 @@ public class MenuFragment extends Fragment {
         FragmentMenuBinding fragmentMenuBinding = FragmentMenuBinding.inflate(getLayoutInflater());
         rvDishes = fragmentMenuBinding.rvDishes;
         adapter = new DishAdapter(getActivity(), menu.dishes, menuId);
+        adapter.updateFullList(menu.dishes);
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);
 
-        setUpSearchView();
         return fragmentMenuBinding.getRoot();
-    }
-
-    private void setUpSearchView() {
-        MainActivity.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
     }
 }
