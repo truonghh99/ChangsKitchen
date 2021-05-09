@@ -7,10 +7,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
 
 import com.example.changskitchen.R;
 import com.example.changskitchen.databinding.ActivityMainBinding;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private static Toolbar toolbar;
     private FirebaseAuth mAuth;
     private String title;
+    Fragment fragment = null;
 
     public static BottomNavigationView bottomNavigation;
     public SearchView searchView;
@@ -91,7 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                currentMenuFragment.adapter.getFilter().filter(newText);
+                if (fragment.equals(currentMenuFragment)) {
+                    currentMenuFragment.adapter.getFilter().filter(newText);
+                } else if (fragment.equals(futureMenusFragment)) {
+                    futureMenusFragment.adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });
@@ -118,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment fragment = null;
                         bottomNavigation.getMenu().setGroupCheckable(0, true, true);
                         switch (item.getItemId()) {
                             case R.id.miHistory:

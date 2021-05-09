@@ -72,8 +72,10 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> im
     }
 
     public void updateFullList(List<Dish> dishes) {
-        dishesFull = dishes;
+        dishesFull = new ArrayList<>(dishes);
+        this.dishes = new ArrayList<>(dishes);
         Log.e(TAG, "FULL SIZE: " + dishesFull.size());
+        Log.e(TAG, "CURRENT SIZE: " + dishes.size());
     }
 
 

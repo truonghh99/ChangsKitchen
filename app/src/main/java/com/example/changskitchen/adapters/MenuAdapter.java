@@ -71,6 +71,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
     public MenuAdapter(Context context, List<String> menuIds) {
         this.context = context;
         this.menuIds = menuIds;
+        this.menuIdsFull = new ArrayList<>(menuIds);
     }
 
     @Override

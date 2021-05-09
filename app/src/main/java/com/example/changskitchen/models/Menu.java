@@ -71,6 +71,7 @@ public class Menu implements Parcelable {
     public void updateView() {
         if (menuFragment == null) return;
         menuFragment.adapter.notifyDataSetChanged();
+        menuFragment.adapter.updateFullList(dishes);
     }
 
     protected Menu(Parcel in) {

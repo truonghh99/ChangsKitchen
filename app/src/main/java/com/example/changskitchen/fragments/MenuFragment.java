@@ -62,10 +62,10 @@ public class MenuFragment extends Fragment {
         FragmentMenuBinding fragmentMenuBinding = FragmentMenuBinding.inflate(getLayoutInflater());
         rvDishes = fragmentMenuBinding.rvDishes;
         adapter = new DishAdapter(getActivity(), menu.dishes, menuId);
-        adapter.updateFullList(menu.dishes);
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);
 
         return fragmentMenuBinding.getRoot();
     }
+
 }

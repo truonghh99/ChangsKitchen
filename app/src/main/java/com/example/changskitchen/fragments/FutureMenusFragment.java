@@ -36,7 +36,7 @@ public class FutureMenusFragment extends Fragment {
 
     final String TAG = "FutureMenusFragment";
     FragmentFutureMenusBinding fragmentFutureMenusBinding;
-    MenuAdapter adapter;
+    public MenuAdapter adapter;
     List<String> menuIds = new ArrayList<>();
     RecyclerView rvMenu;
 
