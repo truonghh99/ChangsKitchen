@@ -13,4 +13,10 @@
         app:showAsAction="ifRoom"
         android:title="PROFILE">
     </item>
+    <item
+        android:id="@+id/miSearch"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"
+        android:title="PROFILE">
+    </item>
 </menu>

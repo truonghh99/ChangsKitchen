@@ -2,6 +2,7 @@ package com.example.changskitchen.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.changskitchen.R;
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.adapters.DishAdapter;
 import com.example.changskitchen.databinding.FragmentMenuBinding;
 import com.example.changskitchen.models.Dish;
@@ -63,6 +65,22 @@ public class MenuFragment extends Fragment {
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);
 
+        setUpSearchView();
         return fragmentMenuBinding.getRoot();
+    }
+
+    private void setUpSearchView() {
+        MainActivity.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 }

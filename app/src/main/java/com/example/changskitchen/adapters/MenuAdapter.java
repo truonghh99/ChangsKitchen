@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,13 +17,44 @@ import com.example.changskitchen.databinding.ItemMenuBinding;
 import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.helpers.DateHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "CurrentFoodAdapter";
     private Context context;
     public static List<String> menuIds;
+    public static List<String> menuIdsFull;
+
+
+    private Filter filter = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<String> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(menuIdsFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (String id : menuIdsFull) {
+                    if (id.toLowerCase().contains(filterPattern)) {
+                        filteredList.add(id);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            menuIds.clear();
+            menuIds.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     @NonNull
     @Override
@@ -29,6 +62,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemMenuBinding itemMenuBinding = ItemMenuBinding.inflate(layoutInflater, parent, false);
         return new ViewHolder(itemMenuBinding);
+    }
+
+    public void updateFullList(List<String> ids) {
+        menuIdsFull = new ArrayList<>(ids);
     }
 
     public MenuAdapter(Context context, List<String> menuIds) {
@@ -45,6 +82,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return menuIds.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

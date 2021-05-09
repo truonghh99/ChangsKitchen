@@ -2,6 +2,7 @@ package com.example.changskitchen.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private String title;
 
     public static BottomNavigationView bottomNavigation;
+    public static SearchView searchView;
     private static FragmentManager fragmentManager;
     private ActivityMainBinding activityMainBinding;
 
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        MenuItem searchItem = menu.findItem(R.id.miSearch);
+        searchView = (SearchView) searchItem.getActionView();
         return true;
     }
 
