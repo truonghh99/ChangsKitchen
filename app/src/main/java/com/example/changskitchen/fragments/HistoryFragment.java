@@ -37,7 +37,7 @@ public class HistoryFragment extends Fragment {
     private static final String TAG = "HistoryFragment";
     private List<Order> orderList = new ArrayList<>();
     private RecyclerView rvOrders;
-    private OrderAdapter adapter;
+    public OrderAdapter adapter;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference().child("orders");
@@ -52,7 +52,6 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        getAllOrder();
         super.onCreate(savedInstanceState);
     }
 
@@ -67,6 +66,7 @@ public class HistoryFragment extends Fragment {
         adapter = new OrderAdapter(getActivity(), orderList);
         rvOrders.setLayoutManager(new LinearLayoutManager(getContext()));
         rvOrders.setAdapter(adapter);
+        if (orderList.isEmpty()) getAllOrder();
 
         return fragmentHistoryBinding.getRoot();
     }
@@ -81,6 +81,7 @@ public class HistoryFragment extends Fragment {
                 Order order = snapshot.getValue(Order.class);
                 order.orderId = snapshot.getKey();
                 orderList.add(0, order);
+                adapter.updateFullList(orderList);
                 adapter.notifyDataSetChanged();
             }
 

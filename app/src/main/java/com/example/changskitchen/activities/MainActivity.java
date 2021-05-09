@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                     currentMenuFragment.adapter.getFilter().filter(newText);
                 } else if (fragment.equals(futureMenusFragment)) {
                     futureMenusFragment.adapter.getFilter().filter(newText);
+                } else if (fragment.equals(historyFragment)) {
+                    historyFragment.adapter.getFilter().filter(newText);
                 }
                 return false;
             }

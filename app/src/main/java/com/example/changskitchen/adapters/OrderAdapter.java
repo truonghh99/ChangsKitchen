@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,13 +32,53 @@ import com.example.changskitchen.helpers.DateHelper;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "OrderAdapter";
     private Context context;
     public static List<Order> orders;
+    public static List<Order> ordersFull;
+
+
+    private Filter filter = new Filter() {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Order> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(ordersFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (Order order : ordersFull) {
+                    if (order.getSummary().toLowerCase().contains(filterPattern) ||
+                            DateHelper.convertToDate(order.date).toLowerCase().contains(filterPattern)) {
+                        filteredList.add(order);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            orders.clear();
+            orders.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public void updateFullList(List<Order> ids) {
+        this.orders = new ArrayList<>(ids);
+        this.ordersFull = new ArrayList<>(ids);
+        Log.e(TAG, "FULL SIZE: " + orders.size());
+        Log.e(TAG, "CURRENT SIZE: " + ordersFull.size());
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -48,7 +90,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     public OrderAdapter(Context context, List<Order> orders) {
         this.context = context;
-        this.orders = orders;
+        this.orders = new ArrayList<>(orders);
     }
 
     @Override
@@ -60,6 +102,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return orders.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
