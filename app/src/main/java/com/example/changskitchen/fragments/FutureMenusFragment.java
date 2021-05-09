@@ -53,7 +53,6 @@ public class FutureMenusFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getMenuIdList();
     }
 
     @Override
@@ -65,6 +64,7 @@ public class FutureMenusFragment extends Fragment {
         adapter = new MenuAdapter(getContext(), menuIds);
         rvMenu.setAdapter(adapter);
         rvMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        if (menuIds.isEmpty()) getMenuIdList();
 
         return fragmentFutureMenusBinding.getRoot();
     }
@@ -79,7 +79,7 @@ public class FutureMenusFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Log.e(TAG, snapshot.toString());
                 menuIds.add(snapshot.getKey());
-                adapter.notifyDataSetChanged();
+                adapter.updateFullList(menuIds);
             }
 
             @Override

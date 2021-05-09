@@ -1,6 +1,7 @@
 package com.example.changskitchen.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,12 @@ import com.example.changskitchen.fragments.MenuFragment;
 import com.example.changskitchen.helpers.DateHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements Filterable {
 
-    private static final String TAG = "CurrentFoodAdapter";
+    private static final String TAG = "FutureMenuAdapter";
     private Context context;
     public static List<String> menuIds;
     public static List<String> menuIdsFull;
@@ -38,7 +40,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
             } else {
                 String filterPattern = charSequence.toString().toLowerCase().trim();
                 for (String id : menuIdsFull) {
-                    if (id.toLowerCase().contains(filterPattern)) {
+                    if (DateHelper.convertToDate(id).toLowerCase().contains(filterPattern) ||
+                        DateHelper.convertToWeekDay(id).toLowerCase().contains(filterPattern)) {
                         filteredList.add(id);
                     }
                 }
@@ -65,13 +68,16 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
     }
 
     public void updateFullList(List<String> ids) {
-        menuIdsFull = new ArrayList<>(ids);
+        this.menuIds = new ArrayList<>(ids);
+        this.menuIdsFull = new ArrayList<>(ids);
+        Log.e(TAG, "FULL SIZE: " + menuIdsFull.size());
+        Log.e(TAG, "CURRENT SIZE: " + menuIds.size());
+        notifyDataSetChanged();
     }
 
     public MenuAdapter(Context context, List<String> menuIds) {
         this.context = context;
-        this.menuIds = menuIds;
-        this.menuIdsFull = new ArrayList<>(menuIds);
+        this.menuIds = new ArrayList<>(menuIds);
     }
 
     @Override
