@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:clickable="true"
+    app:cardBackgroundColor="@color/light_orange"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="10dp">
 
