@@ -65,7 +65,24 @@ public class MenuFragment extends Fragment {
         rvDishes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvDishes.setAdapter(adapter);
 
+        setUpSearchBar();
         return fragmentMenuBinding.getRoot();
     }
 
+
+    private void setUpSearchBar() {
+        if (MainActivity.searchView == null) return;
+        MainActivity.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
 }

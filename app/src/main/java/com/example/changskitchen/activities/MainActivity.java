@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
 
     public static BottomNavigationView bottomNavigation;
-    public SearchView searchView;
+    public static SearchView searchView;
     private static FragmentManager fragmentManager;
     private ActivityMainBinding activityMainBinding;
 
@@ -94,13 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (fragment.equals(currentMenuFragment)) {
-                    currentMenuFragment.adapter.getFilter().filter(newText);
-                } else if (fragment.equals(futureMenusFragment)) {
-                    futureMenusFragment.adapter.getFilter().filter(newText);
-                } else if (fragment.equals(historyFragment)) {
-                    historyFragment.adapter.getFilter().filter(newText);
-                }
+                currentMenuFragment.adapter.getFilter().filter(newText);
                 return false;
             }
         });

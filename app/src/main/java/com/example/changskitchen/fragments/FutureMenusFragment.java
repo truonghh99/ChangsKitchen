@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.changskitchen.activities.MainActivity;
 import com.example.changskitchen.adapters.MenuAdapter;
 import com.example.changskitchen.databinding.FragmentFutureMenusBinding;
 import com.example.changskitchen.helpers.DateHelper;
@@ -66,6 +68,7 @@ public class FutureMenusFragment extends Fragment {
         rvMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
         if (menuIds.isEmpty()) getMenuIdList();
 
+        setUpSearchBar();
         return fragmentFutureMenusBinding.getRoot();
     }
 
@@ -100,6 +103,22 @@ public class FutureMenusFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void setUpSearchBar() {
+        if (MainActivity.searchView == null) return;
+        MainActivity.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
             }
         });
     }
