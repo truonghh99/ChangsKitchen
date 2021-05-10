@@ -129,7 +129,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             tvSummary.setText(order.getSummary());
             tvPrice.setText("" + order.finalPrice + '$');
             if (order.status.equals("COMPLETED")) {
-                cvOrder.setCardBackgroundColor(Color.parseColor("#f2dc96"));
+                cvOrder.setCardBackgroundColor(Color.parseColor("#2A9D8F"));
                 cvOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -138,7 +138,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     }
                 });
             } else {
-                cvOrder.setCardBackgroundColor(Color.parseColor("#d8eaab"));
+                cvOrder.setCardBackgroundColor(Color.parseColor("#E9C46A"));
                 cvOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

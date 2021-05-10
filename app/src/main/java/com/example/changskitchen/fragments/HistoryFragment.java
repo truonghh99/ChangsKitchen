@@ -90,6 +90,15 @@ public class HistoryFragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Order order = snapshot.getValue(Order.class);
+                order.orderId = snapshot.getKey();
+                for (int i = 0; i < orderList.size(); ++i) {
+                    if (orderList.get(i).orderId.equals(order.orderId)) {
+                        orderList.set(i, order);
+                    }
+                }
+                adapter.updateFullList(orderList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
