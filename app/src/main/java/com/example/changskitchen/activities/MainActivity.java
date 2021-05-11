@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Your Profile");
         setSupportActionBar(toolbar);
         CurrentOrder.fetchAvailableDish(DateHelper.convertToMenuId(new Date()));
+        CurrentOrder.prepareId();
         setUpBottomBar();
     }
 

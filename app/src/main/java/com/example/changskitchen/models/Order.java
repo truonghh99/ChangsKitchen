@@ -8,10 +8,12 @@ import androidx.annotation.NonNull;
 import com.example.changskitchen.storage.CurrentOrder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
@@ -67,7 +69,7 @@ public class Order implements Parcelable {
     };
 
     public void saveToDatabase() {
-        DatabaseReference orderRef = ref.push();
+        DatabaseReference orderRef = ref.child(CurrentOrder.key);
         orderRef.setValue(this);
     }
 

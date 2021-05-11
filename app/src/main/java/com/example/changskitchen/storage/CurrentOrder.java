@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.changskitchen.fragments.CartFragment;
 import com.example.changskitchen.models.Dish;
 import com.example.changskitchen.models.Menu;
+import com.example.changskitchen.models.Order;
 import com.example.changskitchen.models.OrderItem;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,8 +35,36 @@ public class CurrentOrder {
     public static float tip;
     public static float totalPrice;
     public static float finalPrice;
+    public static String key = "00000";
     public static HashMap<String, Dish> menuMap = new HashMap<>();
 
+    public static void prepareId() {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("orders");
+        ref.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                String last_key = dataSnapshot.getKey();
+                key = String.format("%05d", Integer.parseInt(last_key) + 1);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @androidx.annotation.Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @androidx.annotation.Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     public static void addItem(OrderItem orderItem, String id, Context context) {
         if (orderItems.isEmpty() || menuId == id) {
             menuId = id;
