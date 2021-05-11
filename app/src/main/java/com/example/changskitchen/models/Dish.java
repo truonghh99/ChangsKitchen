@@ -14,9 +14,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Dish implements Parcelable {
 
-    private final String TAG = "DishModel";
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference().child("dishes");
+    private static final String TAG = "DishModel";
+    static final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    public static DatabaseReference ref = database.getReference().child("dishes");
 
     public String dishId;
     public String name;
@@ -26,20 +26,16 @@ public class Dish implements Parcelable {
     public Dish() {
     }
 
-    public Dish(final String dishId) {
-        Log.e(TAG, "Fetching dish with id: " + dishId);
-        this.dishId = dishId;
+    public static void addDishToAvailable(final String dishId) {
+        Log.e(TAG, "Adding dish to available: " + dishId);
         DatabaseReference currRef = ref.child(dishId);
         currRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.e(TAG, dataSnapshot.toString());
                 Dish dish = dataSnapshot.getValue(Dish.class);
-                name = dish.name;
-                description = dish.description;
-                price = dish.price;
                 CurrentOrder.menuMap.put(dish.name, dish);
-                Log.e(TAG, "Fetched " + dish.name);
+                Log.e(TAG, "Add to menuMap " + dish.name);
             }
 
             @Override

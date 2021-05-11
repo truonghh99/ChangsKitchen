@@ -71,15 +71,15 @@ public class CurrentOrder {
     }
 
     public static void fetchAvailableDish(String id) {
-        Log.e(TAG, "Fetching from " + id);
+        Log.e(TAG, "Fetching available dishes from " + id);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("server/saving-data/fireblog").child("menus");
+        DatabaseReference ref = database.getReference().child("menus");
         DatabaseReference dishRef = ref.child(id).child("dishes");
         ChildEventListener dishListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String dishId = (String) snapshot.getValue();
-                Dish dish = new Dish(dishId);
+                Dish.addDishToAvailable(dishId);
             }
 
             @Override
