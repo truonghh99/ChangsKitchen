@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.example.changskitchen.models.Order;
 public class PlacedOrderFragment extends Fragment {
 
     final static String ORDER_KEY = "ORDER";
+    private static final String TAG = "PlacedOrderFragment";
     FragmentPlacedOrderBinding fragmentPlacedOrderBinding;
     Order order;
     View view_order_placed;
@@ -94,10 +96,9 @@ public class PlacedOrderFragment extends Fragment {
             setStatus(alfa);
 
         }else if (status.equals("CONFIRMED")){
+            Log.e(TAG, "CONFIRMED");
             float alfa= (float) 1;
             setStatus1(alfa);
-
-
 
         }else if (status.equals("PROCESSED")){
             float alfa= (float) 1;

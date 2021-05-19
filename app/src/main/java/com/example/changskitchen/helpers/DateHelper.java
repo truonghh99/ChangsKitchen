@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateHelper {
 
     public static String convertToMenuId(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(date);
         return strDate;
     }
@@ -18,7 +18,7 @@ public class DateHelper {
     public static String convertToWeekDay(String menuId) {
         Date date = null;
         try {
-            date = new SimpleDateFormat("yyyyMMdd").parse(menuId);
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(menuId);
         } catch (ParseException e) {
         }
         DateFormat dateFormat =new SimpleDateFormat("EEEE");
@@ -28,7 +28,7 @@ public class DateHelper {
     public static String convertToDate(String menuId) {
         Date date = new Date();
         try {
-            date = new SimpleDateFormat("yyyyMMdd").parse(menuId);
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(menuId);
         } catch (ParseException e) {
         }
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
