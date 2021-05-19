@@ -28,6 +28,7 @@ public class Order implements Parcelable {
     public String uid;
     public List<OrderItem> items;
     public String date;
+    public float sum;
     public float tax;
     public float tip;
     public float finalPrice;
@@ -40,6 +41,7 @@ public class Order implements Parcelable {
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         items = CurrentOrder.orderItems;
         date = CurrentOrder.menuId;
+        sum = CurrentOrder.totalPrice;
         tax = CurrentOrder.tax;
         tip = CurrentOrder.tip;
         finalPrice = CurrentOrder.finalPrice;
