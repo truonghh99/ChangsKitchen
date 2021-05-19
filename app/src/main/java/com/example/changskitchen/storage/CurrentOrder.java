@@ -66,7 +66,8 @@ public class CurrentOrder {
         });
     }
     public static void addItem(OrderItem orderItem, String id, Context context) {
-        if (orderItems.isEmpty() || menuId == id) {
+        Log.e(TAG, "Adding id: " + menuId + " " + id);
+        if (orderItems.isEmpty() || menuId.equals(id)) {
             menuId = id;
             fetchAvailableDish(menuId);
             date = convertToDate(menuId);
@@ -132,7 +133,8 @@ public class CurrentOrder {
     }
 
     public static void addItem(OrderItem orderItem, String id) {
-        if (orderItems.isEmpty() || menuId == id) {
+        Log.e(TAG, "Adding id: " + menuId + " " + id);
+        if (orderItems.isEmpty() || menuId.equals(id)) {
             menuId = id;
             fetchAvailableDish(menuId);
             date = convertToDate(menuId);

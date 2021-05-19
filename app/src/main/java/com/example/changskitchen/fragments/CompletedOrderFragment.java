@@ -97,6 +97,7 @@ public class CompletedOrderFragment extends Fragment {
             if (CurrentOrder.menuMap.containsKey(order.items.get(i).name)) {
                 Log.e(TAG, "MATCHED " + order.items.get(i).name);
                 CurrentOrder.addItem(order.items.get(i), CurrentOrder.menuId);
+                Log.e(TAG, CurrentOrder.menuId);
                 ++added;
             }
         }
