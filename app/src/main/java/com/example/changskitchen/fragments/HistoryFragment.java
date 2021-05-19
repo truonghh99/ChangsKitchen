@@ -54,6 +54,7 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getAllOrder();
         super.onCreate(savedInstanceState);
     }
 
@@ -68,7 +69,6 @@ public class HistoryFragment extends Fragment {
         adapter = new OrderAdapter(getActivity(), orderList);
         rvOrders.setLayoutManager(new LinearLayoutManager(getContext()));
         rvOrders.setAdapter(adapter);
-        if (orderList.isEmpty()) getAllOrder();
 
         setUpSearchBar();
         return fragmentHistoryBinding.getRoot();

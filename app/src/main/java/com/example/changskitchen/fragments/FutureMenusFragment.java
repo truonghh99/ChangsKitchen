@@ -54,6 +54,7 @@ public class FutureMenusFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getMenuIdList();
         super.onCreate(savedInstanceState);
     }
 
@@ -66,13 +67,12 @@ public class FutureMenusFragment extends Fragment {
         adapter = new MenuAdapter(getContext(), menuIds);
         rvMenu.setAdapter(adapter);
         rvMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        if (menuIds.isEmpty()) getMenuIdList();
 
         setUpSearchBar();
         return fragmentFutureMenusBinding.getRoot();
     }
 
-    private void getMenuIdList() {
+    public void getMenuIdList() {
         String today = DateHelper.convertToMenuId(new Date());
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference().child("menus");
